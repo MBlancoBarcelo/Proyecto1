@@ -1,8 +1,12 @@
+import java.util.Scanner;
+
 public class Fractions {
     public static void main(String[] args) {
-        String s = "4/3";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Que Fraccion quieres");
+        String s = scanner.nextLine() ;
         toWords(s);
-
+        System.out.println(toWords(s));
 
     }
 
@@ -14,7 +18,8 @@ public class Fractions {
         int denomirador = Integer.parseInt(partes[1]);
         String N = leerNumerador(numerador);
         String D = leerDenominador(denomirador, numerador);
-        montarFrase(N,D);
+        String ND = N + " " + D;
+        return ND;
     }
 
 
@@ -48,7 +53,7 @@ public class Fractions {
             return "sis";
         }
         if (numero == 7) {
-            return "seit";
+            return "set";
         }
         if (numero == 8) {
             return "vuit";
@@ -89,10 +94,8 @@ public class Fractions {
         if (numero == 20) {
             return "veint";
         }
-        return "EL NUMERO NO ES VALIDO";
+        return "LA FRACCION NO ES VALIDA";
     }
-
-
 
 
     public static String leerDenominador(int denominador, int numerador) {
@@ -104,13 +107,13 @@ public class Fractions {
         }
         if (denominador == 2) {
             if (numerador == 1) {
-                return "mitgè";
+                return "mig";
             }
-            return "mitgens";
+            return "dossens";
         }
         if (denominador == 3) {
             if (numerador == 1) {
-                return "terce";
+                return "terç";
             }
             return "tercens";
         }
@@ -122,15 +125,15 @@ public class Fractions {
         }
         if (denominador == 5) {
             if (numerador == 1) {
-                return "cinquens";
+                return "cinquè";
             }
-            return "cinquè";
+           return "cinquens";
         }
         if (denominador == 6) {
             if (numerador == 1) {
-                return "sisens";
+                return "sisè";
             }
-            return "sisè";
+            return "sisens";
         }
         if (denominador == 7) {
             if (numerador == 1) {
@@ -152,9 +155,9 @@ public class Fractions {
         }
         if (denominador == 10) {
             if (numerador == 1) {
-                return "desé";
+                return "décim";
             }
-            return "desens";
+            return "décims";
         }
         if (denominador == 11) {
             if (numerador == 1) {
@@ -163,7 +166,7 @@ public class Fractions {
             return "onzens";
         }
         if (denominador == 12) {
-            if (numerador == 1){
+            if (numerador == 1) {
                 return "dotzé";
             }
             return "dotzens";
@@ -193,33 +196,27 @@ public class Fractions {
             return "setzens";
         }
         if (denominador == 17) {
-            if (numerador == 1){
+            if (numerador == 1) {
                 return "dissete";
             }
             return "dissetens";
         }
         if (denominador == 18) {
-            if (numerador == 1){
+            if (numerador == 1) {
                 return "divuité";
             }
             return "divuitens";
         }
         if (denominador == 19) {
-           if (numerador == 1){
-               return "dinové";
-           }
-           return "dinovens";
+            if (numerador == 1) {
+                return "dinové";
+            }
+            return "dinovens";
         }
         if (denominador == 20) {
             return "vint";
         }
-        return "EL NUMERO NO ES VALIDO";
+        return "";
     }
-
-
-    public static String montarFrase(String numerador,String denominador) {
-
-
-
-    }
+}
 
