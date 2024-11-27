@@ -12,14 +12,12 @@ public class Fractions {
 
 
     public static String toWords(String s) {
-        //return "Un mig";
         String[] partes = s.split("/");
         int numerador = Integer.parseInt(partes[0]);
         int denomirador = Integer.parseInt(partes[1]);
         String N = leerNumerador(numerador);
         String D = leerDenominador(denomirador, numerador);
-        String ND = N + " " + D;
-        return ND;
+        return N + " " + D;
     }
 
 
@@ -32,68 +30,78 @@ public class Fractions {
     //cuando el numerador sea mayor a 1 seran en singular en el resto de casos sera prural y las potencian
     // de 10 son èsim
 
+    public static int dividirNumeros (int numerador,int denominador) {
+        int unidades;
+        int decimas = 0;
+        while (numerador >= 10) {
+            numerador = numerador / 10;
+            decimas++;
 
-    public static String leerNumerador(int numero) {
-        if (numero == 1) {
+        }
+        unidades = numerador % denominador;
+        return unidades;
+    }
+
+
+    public static String leerNumerador(int numerador) {
+        if (numerador == 1) {
             return "un";
         }
-        if (numero == 2) {
+        if (numerador == 2) {
             return "dos";
         }
-        if (numero == 3) {
+        if (numerador == 3) {
             return "tres";
         }
-        if (numero == 4) {
+        if (numerador == 4) {
             return "quatre";
         }
-        if (numero == 5) {
+        if (numerador == 5) {
             return "cinc";
         }
-        if (numero == 6) {
+        if (numerador == 6) {
             return "sis";
         }
-        if (numero == 7) {
+        if (numerador == 7) {
             return "set";
         }
-        if (numero == 8) {
+        if (numerador == 8) {
             return "vuit";
         }
-        if (numero == 9) {
+        if (numerador == 9) {
             return "nou";
         }
-        if (numero == 10) {
+        if (numerador == 10) {
             return "deu";
         }
-        if (numero == 11) {
+        if (numerador == 11) {
             return "onze";
         }
-        if (numero == 12) {
+        if (numerador == 12) {
             return "dotze";
         }
-        if (numero == 13) {
+        if (numerador == 13) {
             return "tretze";
         }
-        if (numero == 14) {
+        if (numerador == 14) {
             return "catorze";
         }
-        if (numero == 15) {
+        if (numerador == 15) {
             return "quinze";
         }
-        if (numero == 16) {
+        if (numerador == 16) {
             return "setze";
         }
-        if (numero == 17) {
+        if (numerador == 17) {
             return "disset";
         }
-        if (numero == 18) {
+        if (numerador == 18) {
             return "divuit";
         }
-        if (numero == 19) {
+        if (numerador == 19) {
             return "dinou";
         }
-        if (numero == 20) {
-            return "veint";
-        }
+
         return "LA FRACCION NO ES VALIDA";
     }
 
@@ -212,9 +220,6 @@ public class Fractions {
                 return "dinové";
             }
             return "dinovens";
-        }
-        if (denominador == 20) {
-            return "vint";
         }
         return "";
     }

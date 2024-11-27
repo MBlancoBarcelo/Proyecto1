@@ -1,4 +1,4 @@
-/*import org.junit.Test;
+import org.junit.Test;
 
 
 import static org.junit.Assert.*;
@@ -30,7 +30,7 @@ public class FractionsTest {
         assertEquals("Un trentè", Fractions.toWords("1/30"));
         assertEquals("Un cinquantè", Fractions.toWords("1/50"));
         assertEquals("Cinc vint-i-dosens", Fractions.toWords("5/22"));
-        assertEquals("Setze cinquanta-tresens", Fractions.toWords("16/53"));s
+        assertEquals("Setze cinquanta-tresens", Fractions.toWords("16/53"));
         assertEquals("Un cinquanta-novè", Fractions.toWords("1/59"));
         assertEquals("Noranta-vuit noranta-novens", Fractions.toWords("98/99"));
     }
@@ -85,5 +85,3 @@ public class FractionsTest {
                 Fractions.toWords("458765/653"));
     }
 }
-
-*/
