@@ -16,16 +16,15 @@ public class Fractions {
         int numerador = Integer.parseInt(partes[0]);
         int denomirador = Integer.parseInt(partes[1]);
 
+        //Comprueba que los numeros no son iguales
+        if (numerador == denomirador) {
+            return "Un";
+        }
 
         String N = numeradorHasta100(numerador);
         String D = leerDenominador(denomirador, numerador);
 
-        if (numerador == denomirador) {
-            return "Un";
-        }
-        if (pasarAUnidadesNumerador(numerador) > 19) {
-            String N1 = leerNumeradorHastaEl19(numerador);
-        }
+
 
         // Juntar numberador y denominador y pasar a mayuscula
         String resultado = N + " " + D;
@@ -40,8 +39,8 @@ public class Fractions {
 
     public  static String numeradorHasta100(int numerador) {
         if (numerador < 20) return leerNumeradorHastaEl19(numerador);
-        int decimales = numerador / 100;
-        int unidades = numerador % 100;
+        int decimales = numerador / 10;
+        int unidades = numerador % 10;
         if (decimales == 2) {
             return "vint-i-" + leerNumeradorHastaEl19(unidades);
         } else if (decimales == 3) {
@@ -51,8 +50,17 @@ public class Fractions {
         } else if (decimales == 5) {
             return "cinquanta-" + leerNumeradorHastaEl19(unidades);
         } else if (decimales == 6) {
-
+            return "seixanta-" + leerNumeradorHastaEl19(unidades);
+        } else if (decimales == 7) {
+            return "setanta-" + leerNumeradorHastaEl19(unidades);
+        } else if (decimales == 8) {
+            return "vuitanta-" + leerNumeradorHastaEl19(unidades);
+        } else if (decimales ==  9) {
+            return "noranta-" + leerNumeradorHastaEl19(unidades);
+        } else if (decimales == 10) {
+            return "cent-" + leerNumeradorHastaEl19(unidades);
         }
+        return "Numero incorrecto";
     }
 
 
@@ -65,17 +73,10 @@ public class Fractions {
     //cuando el numerador sea mayor a 1 seran en singular en el resto de casos sera prural y las potencian
     // de 10 son èsim
 
-    public static int pasarAUnidadesNumerador (int numerador) {
-        int unidades = numerador % 10;
-        return unidades;
-
-    }
-
     public static String leerNumeradorHastaEl19(int numerador) {
         if (numerador == 1) {
             return "un";
-        }
-        if (numerador == 2) {
+        } else if (numerador == 2) {
             return "dos";
         }
         if (numerador == 3) {
