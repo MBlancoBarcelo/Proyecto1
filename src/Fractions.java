@@ -213,7 +213,10 @@ public class Fractions {
     //hace lo mismo que la anterior pero junta un prefijo dependiendo del numero de la variable decimales + un resultado
     //que coje de la funcion anterior con la variable unidades
     public static String leerDenominadorHasta100 (int denominador,int numerador) {
-        if (denominador < 20) return leerDenominadorHasta19(denominador,numerador);
+        if (denominador < 20 && denominador != 1) return leerDenominadorHasta19(denominador,numerador);
+        if (denominador==1) {
+            return "";
+        }
         int decimales = denominador / 10;
         int unidades = denominador % 10;
         if (decimales == 2) {
