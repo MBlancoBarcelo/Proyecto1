@@ -260,7 +260,7 @@ public class Fractions {
             return "noranta-" + leerDenominadorHasta19(unidades,numerador);
         } else if (decimales == 10) {
             if (unidades == 0) {
-                return "cent";
+                return "centè";
             }
             return "centesim-" + leerDenominadorHasta19(unidades,numerador);
         }
