@@ -214,15 +214,17 @@ public class Fractions {
         int decimales = denominador / 10;
         int unidades = denominador % 10;
         if (decimales == 2) {
-            if (unidades == 0) {
-                return "vint";
+            if (unidades == 0 && numerador == 1 ) {
+                return "vintè";
+            } else if (unidades == 0) {
+                return "vintens";
             }
             return "vint-i-" + leerDenominadorHasta19(unidades, numerador);
         } else if (decimales == 3) {
             if (unidades == 0){
                 return "trentè";
             }
-            return "trenta-i-" + leerDenominadorHasta19(unidades,numerador) ;
+            return "trenta-" + leerDenominadorHasta19(unidades,numerador) ;
         } else if (decimales == 4) {
             if (unidades == 0){
                 return "quarentè";
