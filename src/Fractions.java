@@ -10,7 +10,7 @@ public class Fractions {
 
     }
 
-
+    //Es la funcion llama funciones sirve para construir la frase
     public static String toWords(String s) {
         String[] partes = s.split("/");
         int numerador = Integer.parseInt(partes[0]);
@@ -21,8 +21,8 @@ public class Fractions {
             return "Un";
         }
 
-        String N = numeradorHasta100(numerador);
-        String D = leerDenominador(denomirador, numerador);
+        String N = leerNumeradorHasta100(numerador);
+        String D = leerDenominadorHasta100(denomirador, numerador);
 
 
 
@@ -32,12 +32,59 @@ public class Fractions {
         return resultado;
     }
 
+    //Coge la primera letra del de una combinacion y la devuelve para que este en mayuscula la primera letra
     public static String pasarAMayusculaPimeraPalabra(String resultado) {
-        String cambio = resultado.substring(0,1).toUpperCase() + resultado.substring(1) ;
-        return cambio;
+        return resultado.substring(0,1).toUpperCase() + resultado.substring(1);
     }
 
-    public  static String numeradorHasta100(int numerador) {
+    //Cuando le das un numero te lo tranforma en letras pero solo los 19 primeros y esto lo hace el numerador
+    public static String leerNumeradorHastaEl19(int numerador) {
+        if (numerador == 1) {
+            return "un";
+        } else if (numerador == 2) {
+            return "dos";
+        } else if (numerador == 3) {
+            return "tres";
+        } else if (numerador == 4) {
+            return "quatre";
+        } else if (numerador == 5) {
+            return "cinc";
+        } else if (numerador == 6) {
+            return "sis";
+        } else if (numerador == 7) {
+            return "set";
+        } else if (numerador == 8) {
+            return "vuit";
+        } else if (numerador == 9) {
+            return "nou";
+        } else if (numerador == 10) {
+            return "deu";
+        } else if (numerador == 11) {
+            return "onze";
+        } else if (numerador == 12) {
+            return "dotze";
+        } else if (numerador == 13) {
+            return "tretze";
+        } else if (numerador == 14) {
+            return "catorze";
+        } else if (numerador == 15) {
+            return "quinze";
+        } else if (numerador == 16) {
+            return "setze";
+        } else if (numerador == 17) {
+            return "disset";
+        } else if (numerador == 18) {
+            return "divuit";
+        } else if (numerador == 19) {
+            return "dinou";
+        }
+
+        return "LA FRACCION NO ES VALIDA";
+    }
+
+    //hace lo mismo que la anterior pero junta un prefijo dependiendo del numero de la variable decimales + un resultado
+    //que coje de la funcion anterior con la variable unidades
+    public  static String leerNumeradorHasta100(int numerador) {
         if (numerador < 20) return leerNumeradorHastaEl19(numerador);
         int decimales = numerador / 10;
         int unidades = numerador % 10;
@@ -63,194 +110,156 @@ public class Fractions {
         return "Numero incorrecto";
     }
 
-
-    //Numeradores
-    // Los 20 primeros son especiales asi que debemos poner todos los casos
-    //Para sacar los demas los dividiremos para sacer centenas decenas y unidades
-    //diviendiendo entre 100 y 10 para sacarlos siendo los residuos de /10 son las unidades
-    //los denomedaros son parecidos los 20 primeros todos los casos y a partir del vente se añade un è
-    //siempre que sea en singular y en prural seria ens
-    //cuando el numerador sea mayor a 1 seran en singular en el resto de casos sera prural y las potencian
-    // de 10 son èsim
-
-    public static String leerNumeradorHastaEl19(int numerador) {
-        if (numerador == 1) {
-            return "un";
-        } else if (numerador == 2) {
-            return "dos";
-        }
-        if (numerador == 3) {
-            return "tres";
-        }
-        if (numerador == 4) {
-            return "quatre";
-        }
-        if (numerador == 5) {
-            return "cinc";
-        }
-        if (numerador == 6) {
-            return "sis";
-        }
-        if (numerador == 7) {
-            return "set";
-        }
-        if (numerador == 8) {
-            return "vuit";
-        }
-        if (numerador == 9) {
-            return "nou";
-        }
-        if (numerador == 10) {
-            return "deu";
-        }
-        if (numerador == 11) {
-            return "onze";
-        }
-        if (numerador == 12) {
-            return "dotze";
-        }
-        if (numerador == 13) {
-            return "tretze";
-        }
-        if (numerador == 14) {
-            return "catorze";
-        }
-        if (numerador == 15) {
-            return "quinze";
-        }
-        if (numerador == 16) {
-            return "setze";
-        }
-        if (numerador == 17) {
-            return "disset";
-        }
-        if (numerador == 18) {
-            return "divuit";
-        }
-        if (numerador == 19) {
-            return "dinou";
-        }
-
-        return "LA FRACCION NO ES VALIDA";
-    }
-
-
-    public static String leerDenominador(int denominador, int numerador) {
+    //Cuando le das un numero te lo tranforma en letras pero solo los 19 primeros te transforma los denominadores.
+    public static String leerDenominadorHasta19(int denominador, int numerador) {
         if (denominador == 1) {
-            if (numerador == 1) {
-                return "";
-            }
-            return "";
-        }
-        if (denominador == 2) {
+            return "unè";
+        } else if (denominador == 2) {
             if (numerador == 1) {
                 return "mig";
             }
-            return "dossens";
-        }
-        if (denominador == 3) {
+            return "dosens";
+        } else if (denominador == 3) {
             if (numerador == 1) {
                 return "terç";
             }
-            return "tercens";
-        }
-        if (denominador == 4) {
+            return "tresens";
+        } else if (denominador == 4) {
             if (numerador == 1) {
                 return "quart";
             }
             return "quarts";
-        }
-        if (denominador == 5) {
+        } else if (denominador == 5) {
             if (numerador == 1) {
                 return "cinquè";
             }
            return "cinquens";
-        }
-        if (denominador == 6) {
+        } else if (denominador == 6) {
             if (numerador == 1) {
                 return "sisè";
             }
             return "sisens";
-        }
-        if (denominador == 7) {
+        } else if (denominador == 7) {
             if (numerador == 1) {
                 return "setè";
             }
             return "setens";
-        }
-        if (denominador == 8) {
+        } else if (denominador == 8) {
             if (numerador == 1) {
                 return "vuitè";
             }
             return "vuitens";
-        }
-        if (denominador == 9) {
+        } else if (denominador == 9) {
             if (numerador == 1) {
                 return "novè";
             }
             return "novens";
-        }
-        if (denominador == 10) {
+        } else if (denominador == 10) {
             if (numerador == 1) {
                 return "dècim";
             }
             return "dècims";
-        }
-        if (denominador == 11) {
+        } else if (denominador == 11) {
             if (numerador == 1) {
                 return "onzè";
             }
             return "onzens";
-        }
-        if (denominador == 12) {
+        } else if (denominador == 12) {
             if (numerador == 1) {
                 return "dotzè";
             }
             return "dotzens";
-        }
-        if (denominador == 13) {
+        } else if (denominador == 13) {
             if (numerador == 1) {
                 return "tretzè";
             }
             return "tretzens";
-        }
-        if (denominador == 14) {
+        } else if (denominador == 14) {
             if (numerador == 1) {
                 return "catorzè";
             }
             return "catorzens";
-        }
-        if (denominador == 15) {
+        } else if (denominador == 15) {
             if (numerador == 1) {
                 return "quienzè";
             }
             return "quinzens";
-        }
-        if (denominador == 16) {
+        } else if (denominador == 16) {
             if (numerador == 1) {
                 return "setzè";
             }
             return "setzens";
-        }
-        if (denominador == 17) {
+        } else if (denominador == 17) {
             if (numerador == 1) {
                 return "dissetè";
             }
             return "dissetens";
-        }
-        if (denominador == 18) {
+        } else if (denominador == 18) {
             if (numerador == 1) {
                 return "divuitè";
             }
             return "divuitens";
-        }
-        if (denominador == 19) {
+        } else if (denominador == 19) {
             if (numerador == 1) {
                 return "dinovè";
             }
             return "dinovens";
         }
         return "";
+    }
+    //hace lo mismo que la anterior pero junta un prefijo dependiendo del numero de la variable decimales + un resultado
+    //que coje de la funcion anterior con la variable unidades
+    public static String leerDenominadorHasta100 (int denominador,int numerador) {
+        if (denominador < 20) return leerDenominadorHasta19(denominador,numerador);
+        int decimales = denominador / 10;
+        int unidades = denominador % 10;
+        if (decimales == 2) {
+            if (unidades == 0) {
+                return "vint";
+            }
+            return "vint-i-" + leerDenominadorHasta19(unidades, numerador);
+        } else if (decimales == 3) {
+            if (unidades == 0){
+                return "trentè";
+            }
+            return "trenta-i-" + leerDenominadorHasta19(unidades,numerador) ;
+        } else if (decimales == 4) {
+            if (unidades == 0){
+                return "quarentè";
+            }
+            return "quaranté-" + leerDenominadorHasta19(unidades,numerador);
+        } else if (decimales == 5) {
+            if (unidades == 0) {
+                return "cinquantè";
+            }
+            return "cinquanta-" + leerDenominadorHasta19(unidades,numerador);
+        } else if (decimales == 6) {
+            if (unidades == 0) {
+                return "seixantè";
+            }
+            return "seixanta-" + leerDenominadorHasta19(unidades,numerador);
+        } else if (decimales == 7) {
+            if (unidades == 0) {
+                return "setantè";
+            }
+            return "setanta-" + leerDenominadorHasta19(unidades,numerador);
+        } else if (decimales == 8) {
+            if (unidades == 0) {
+                return "vuitantè";
+            }
+            return "vuitanta-" + leerDenominadorHasta19(unidades,numerador);
+        } else if (decimales ==  9) {
+            if (unidades == 0) {
+                return "norantè";
+            }
+            return "noranta-" + leerDenominadorHasta19(unidades,numerador);
+        } else if (decimales == 10) {
+            if (unidades == 0) {
+                return "cent";
+            }
+            return "centesim-" + leerDenominadorHasta19(unidades,numerador);
+        }
+        return "Numero incorrecto";
     }
 }
 
