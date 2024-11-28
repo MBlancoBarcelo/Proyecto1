@@ -113,6 +113,9 @@ public class Fractions {
     //Cuando le das un numero te lo tranforma en letras pero solo los 19 primeros te transforma los denominadores.
     public static String leerDenominadorHasta19(int denominador, int numerador) {
         if (denominador == 1) {
+            if (numerador != 1) {
+                return "unens";
+            }
             return "unè";
         } else if (denominador == 2) {
             if (numerador == 1) {
