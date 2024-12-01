@@ -21,8 +21,8 @@ public class Fractions {
             return "Un";
         }
 
-        String N = leerNumeradorHasta100(numerador);
-        String D = leerDenominadorHasta100(denomirador, numerador);
+        String N = leerNumeradorHasta1000(numerador);
+        String D = leerDenominadorHasta1000(denomirador, numerador);
 
 
 
@@ -77,6 +77,10 @@ public class Fractions {
             return "divuit";
         } else if (numerador == 19) {
             return "dinou";
+        } else if (numerador == 20) {
+            return "vint";
+        } else if (numerador == 0) {
+            return "";
         }
 
         return "LA FRACCION NO ES VALIDA";
@@ -85,7 +89,7 @@ public class Fractions {
     //hace lo mismo que la anterior pero junta un prefijo dependiendo del numero de la variable decimales + un resultado
     //que coje de la funcion anterior con la variable unidades
     public  static String leerNumeradorHasta100(int numerador) {
-        if (numerador < 20) return leerNumeradorHastaEl19(numerador);
+        if (numerador <= 20) return leerNumeradorHastaEl19(numerador);
         int decimales = numerador / 10;
         int unidades = numerador % 10;
         if (decimales == 2) {
@@ -104,10 +108,40 @@ public class Fractions {
             return "vuitanta-" + leerNumeradorHastaEl19(unidades);
         } else if (decimales ==  9) {
             return "noranta-" + leerNumeradorHastaEl19(unidades);
-        } else if (decimales == 10) {
-            return "cent-" + leerNumeradorHastaEl19(unidades);
         }
         return "Numero incorrecto";
+    }
+
+    public static String leerNumeradorHasta1000(int numerador) {
+        if (numerador < 100) return leerNumeradorHasta100(numerador);
+        int centesima = numerador / 100;
+        int decimales = numerador % 100;
+        if (centesima == 1 && decimales == 0){
+            return "cent" +  leerNumeradorHasta100(decimales);
+        } else if (centesima == 1) {
+            return "cent" + " " + leerNumeradorHasta100(decimales);
+        } else if (centesima == 2 && decimales == 0) {
+            return  "dos-cents" + leerNumeradorHasta100(decimales);
+        } else if (centesima == 2 ) {
+            return "dos-cents" + " " + leerNumeradorHasta100(decimales);
+        } else if (centesima == 3 ) {
+            return "tres-cents" + " " + leerNumeradorHasta100(decimales);
+        } else if (centesima == 4 ) {
+            return "quatre-cents" + " " + leerNumeradorHasta100(decimales);
+        } else if (centesima == 5) {
+            return "cinc-cents" + " " + leerNumeradorHasta100(decimales);
+        } else if (centesima == 6 ) {
+            return "sis-cents" + " " + leerNumeradorHasta100(decimales);
+        } else if (centesima == 7 ) {
+            return "set-cents" + " " + leerNumeradorHasta100(decimales);
+        } else if (centesima == 8 ) {
+            return "vuit-cents" + " " + leerNumeradorHasta100(decimales);
+        } else if (centesima == 9 ) {
+            return "nou-cents" + " " + leerNumeradorHasta100(decimales);
+        } else if (centesima == 10) {
+            return "mil" + " " + leerNumeradorHasta100(decimales);
+        }
+        return "";
     }
 
     //Cuando le das un numero te lo tranforma en letras pero solo los 19 primeros te transforma los denominadores.
@@ -207,13 +241,18 @@ public class Fractions {
                 return "dinovè";
             }
             return "dinovens";
+        } else if (denominador == 20){
+            if (numerador == 1){
+                return "vintè";
+            }
+            return "vintens";
         }
         return "";
     }
     //hace lo mismo que la anterior pero junta un prefijo dependiendo del numero de la variable decimales + un resultado
     //que coje de la funcion anterior con la variable unidades
     public static String leerDenominadorHasta100 (int denominador,int numerador) {
-        if (denominador < 20 && denominador != 1) return leerDenominadorHasta19(denominador,numerador);
+        if (denominador <= 20 && denominador != 1) return leerDenominadorHasta19(denominador,numerador);
         if (denominador==1) {
             return "";
         }
@@ -263,11 +302,27 @@ public class Fractions {
             return "noranta-" + leerDenominadorHasta19(unidades,numerador);
         } else if (decimales == 10) {
             if (unidades == 0) {
-                return "centè";
+                return "centèsim";
             }
             return "centesim-" + leerDenominadorHasta19(unidades,numerador);
         }
         return "Numero incorrecto";
     }
+    public static String leerDenominadorHasta1000 (int denominador,int numerador) {
+        if (denominador <= 100 && denominador != 1 ) return leerDenominadorHasta100(denominador,numerador);
+        if (denominador == 1 ) {
+            return "";
+        }
+        int centesima = denominador / 100;
+        int decimales = denominador % 100;
+        if (centesima == 1) {
+            if (numerador == 1 && decimales == 0 )  {
+                return  "centèsim";
+            }
+            return "cent" + " " + leerDenominadorHasta100(decimales,numerador);
+        }
+        return "";
+    }
+
 }
 
