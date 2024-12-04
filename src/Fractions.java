@@ -23,7 +23,7 @@ public class Fractions {
 
         String N = leerNumeradorHasta1000(numerador);
         String D = leerDenominadorHasta1000(denomirador, numerador);
-        D = pluralOSingular(D,numerador);
+        D = pluralOSingular(D,numerador,denomirador);
 
 
         // Juntar numberador y denominador y pasar a mayuscula
@@ -35,6 +35,15 @@ public class Fractions {
     //Coge la primera letra del de una combinacion y la devuelve para que este en mayuscula la primera letra
     public static String pasarAMayusculaPimeraPalabra(String resultado) {
         return resultado.substring(0,1).toUpperCase() + resultado.substring(1);
+    }
+
+    public static String pluralOSingular (String denominador , int numerador,int denominador2) {
+        if (numerador == 1) {
+            return denominador + "è";
+        }else if (numerador > 1) {
+            return denominador + "ens";
+        }
+        return "";
     }
 
     //Cuando le das un numero te lo tranforma en letras pero solo los 19 primeros y esto lo hace el numerador
@@ -145,13 +154,141 @@ public class Fractions {
     }
 
     //Cuando le das un numero te lo tranforma en letras pero solo los 19 primeros te transforma los denominadores.
-
-    public static String pluralOSingular (String denominador , int numerador ) {
-        if (numerador == 1) {
-            return denominador + "è";
-        }else if (numerador > 1) {
-            return denominador + "ens";
+    public static String leerDenominadorHasta19(int denominador, int numerador) {
+        if (denominador == 1) {
+            return "un";
+        } else if (denominador == 2) {
+            return "dos";
+        } else if (denominador == 3) {
+            return "tres";
+        } else if (denominador == 4) {
+            return "quart";
+        } else if (denominador == 5) {
+            return "cinqu";
+        } else if (denominador == 6) {
+            return "sis";
+        } else if (denominador == 7) {
+            return "set";
+        } else if (denominador == 8) {
+            return "vuit";
+        } else if (denominador == 9) {
+            return "nov";
+        } else if (denominador == 10) {
+            return "dècim";
+        } else if (denominador == 11) {
+            return "onz";
+        } else if (denominador == 12) {
+            return "dotz";
+        } else if (denominador == 13) {
+            return "tretz";
+        } else if (denominador == 14) {
+            return "catorz";
+        } else if (denominador == 15) {
+            if (numerador == 1) {
+                return "quienzè";
+            }
+            return "quinzens";
+        } else if (denominador == 16) {
+            if (numerador == 1) {
+                return "setzè";
+            }
+            return "setzens";
+        } else if (denominador == 17) {
+            if (numerador == 1) {
+                return "dissetè";
+            }
+            return "dissetens";
+        } else if (denominador == 18) {
+            if (numerador == 1) {
+                return "divuitè";
+            }
+            return "divuitens";
+        } else if (denominador == 19) {
+            if (numerador == 1) {
+                return "dinovè";
+            }
+            return "dinovens";
+        } else if (denominador == 20){
+            if (numerador == 1){
+                return "vintè";
+            }
+            return "vintens";
         }
+        return "";
+    }
+    //hace lo mismo que la anterior pero junta un prefijo dependiendo del numero de la variable decimales + un resultado
+    //que coje de la funcion anterior con la variable unidades
+    public static String leerDenominadorHasta100 (int denominador,int numerador) {
+        if (denominador <= 20 && denominador != 1) return leerDenominadorHasta19(denominador,numerador);
+        if (denominador==1) {
+            return "";
+        }
+        int decimales = denominador / 10;
+        int unidades = denominador % 10;
+        if (decimales == 2) {
+            if (unidades == 0 && numerador == 1 ) {
+                return "vintè";
+            } else if (unidades == 0) {
+                return "vintens";
+            }
+            return "vint-i-" + leerDenominadorHasta19(unidades, numerador);
+        } else if (decimales == 3) {
+            if (unidades == 0){
+                return "trentè";
+            }
+            return "trenta-" + leerDenominadorHasta19(unidades,numerador) ;
+        } else if (decimales == 4) {
+            if (unidades == 0){
+                return "quarentè";
+            }
+            return "quaranté-" + leerDenominadorHasta19(unidades,numerador);
+        } else if (decimales == 5) {
+            if (unidades == 0) {
+                return "cinquantè";
+            }
+            return "cinquanta-" + leerDenominadorHasta19(unidades,numerador);
+        } else if (decimales == 6) {
+            if (unidades == 0) {
+                return "seixantè";
+            }
+            return "seixanta-" + leerDenominadorHasta19(unidades,numerador);
+        } else if (decimales == 7) {
+            if (unidades == 0) {
+                return "setantè";
+            }
+            return "setanta-" + leerDenominadorHasta19(unidades,numerador);
+        } else if (decimales == 8) {
+            if (unidades == 0) {
+                return "vuitantè";
+            }
+            return "vuitanta-" + leerDenominadorHasta19(unidades,numerador);
+        } else if (decimales ==  9) {
+            if (unidades == 0) {
+                return "norantè";
+            }
+            return "noranta-" + leerDenominadorHasta19(unidades,numerador);
+        } else if (decimales == 10) {
+            if (unidades == 0) {
+                return "centèsim";
+            }
+            return "centesim-" + leerDenominadorHasta19(unidades,numerador);
+        }
+        return "Numero incorrecto";
+    }
+    public static String leerDenominadorHasta1000 (int denominador,int numerador) {
+        if (denominador <= 100 && denominador != 1 ) return leerDenominadorHasta100(denominador,numerador);
+        if (denominador == 1 ) {
+            return "";
+        }
+        int centesima = denominador / 100;
+        int decimales = denominador % 100;
+        if (centesima == 1) {
+            if (numerador == 1 && decimales == 0 )  {
+                return  "centèsim";
+            }
+            return "cent" + " " + leerDenominadorHasta100(decimales,numerador);
+        }
+        return "";
     }
 
 }
