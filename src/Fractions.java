@@ -23,7 +23,7 @@ public class Fractions {
 
         String N = leerNumeradorHasta1000(numerador);
         String D = leerDenominadorHasta1000(denomirador, numerador);
-
+        D = pluralOSingular(D,numerador,denomirador);
 
 
         // Juntar numberador y denominador y pasar a mayuscula
@@ -35,6 +35,15 @@ public class Fractions {
     //Coge la primera letra del de una combinacion y la devuelve para que este en mayuscula la primera letra
     public static String pasarAMayusculaPimeraPalabra(String resultado) {
         return resultado.substring(0,1).toUpperCase() + resultado.substring(1);
+    }
+
+    public static String pluralOSingular (String denominador , int numerador,int denominador2) {
+        if (numerador == 1) {
+            return denominador + "è";
+        }else if (numerador > 1) {
+            return denominador + "ens";
+        }
+        return "";
     }
 
     //Cuando le das un numero te lo tranforma en letras pero solo los 19 primeros y esto lo hace el numerador
@@ -147,75 +156,33 @@ public class Fractions {
     //Cuando le das un numero te lo tranforma en letras pero solo los 19 primeros te transforma los denominadores.
     public static String leerDenominadorHasta19(int denominador, int numerador) {
         if (denominador == 1) {
-            if (numerador != 1) {
-                return "unens";
-            }
-            return "unè";
+            return "un";
         } else if (denominador == 2) {
-            if (numerador == 1) {
-                return "mig";
-            }
-            return "dosens";
+            return "dos";
         } else if (denominador == 3) {
-            if (numerador == 1) {
-                return "terç";
-            }
-            return "tresens";
+            return "tres";
         } else if (denominador == 4) {
-            if (numerador == 1) {
-                return "quart";
-            }
-            return "quarts";
+            return "quart";
         } else if (denominador == 5) {
-            if (numerador == 1) {
-                return "cinquè";
-            }
-           return "cinquens";
+           return "cinqu";
         } else if (denominador == 6) {
-            if (numerador == 1) {
-                return "sisè";
-            }
-            return "sisens";
+            return "sis";
         } else if (denominador == 7) {
-            if (numerador == 1) {
-                return "setè";
-            }
-            return "setens";
+            return "set";
         } else if (denominador == 8) {
-            if (numerador == 1) {
-                return "vuitè";
-            }
-            return "vuitens";
+                return "vuit";
         } else if (denominador == 9) {
-            if (numerador == 1) {
-                return "novè";
-            }
-            return "novens";
+                return "nov";
         } else if (denominador == 10) {
-            if (numerador == 1) {
                 return "dècim";
-            }
-            return "dècims";
         } else if (denominador == 11) {
-            if (numerador == 1) {
-                return "onzè";
-            }
-            return "onzens";
+                return "onz";
         } else if (denominador == 12) {
-            if (numerador == 1) {
-                return "dotzè";
-            }
-            return "dotzens";
+                return "dotz";
         } else if (denominador == 13) {
-            if (numerador == 1) {
-                return "tretzè";
-            }
-            return "tretzens";
+                return "tretz";
         } else if (denominador == 14) {
-            if (numerador == 1) {
-                return "catorzè";
-            }
-            return "catorzens";
+                return "catorz";
         } else if (denominador == 15) {
             if (numerador == 1) {
                 return "quienzè";
