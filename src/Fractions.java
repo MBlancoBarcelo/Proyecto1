@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Fractions {
@@ -21,24 +22,51 @@ public class Fractions {
             return "Un";
         }
 
-        String N = leerNumeradorHasta1000(numerador);
-        String D = leerDenominadorHasta1000(denomirador, numerador);
-        D = pluralOSingular(D,numerador,denomirador);
+        //Comprueba que los denominador no sea uno especial que en este caso serian del 1 al 4
+        if (denomirador <= 4 ) {
+            String N = leerNumeradorHasta19(numerador);
+            String D = leerDenominadorSiEsEspecial(denomirador,numerador);
+            D = pruralOSingularEspecial(D,numerador);
+            String resultado = N + " " + D;
+            resultado = pasarAMayusculaPrimeraPalabra(resultado);
+            return resultado;
+        }
+
+        String N = leerNumeradorHasta19(numerador);
+        String D = leerDenominadorHasta19(denomirador, numerador);
+        D = pluralOSingular(D,numerador);
 
 
         // Juntar numberador y denominador y pasar a mayuscula
         String resultado = N + " " + D;
-        resultado = pasarAMayusculaPimeraPalabra(resultado);
+        resultado = pasarAMayusculaPrimeraPalabra(resultado);
         return resultado;
     }
 
     //Coge la primera letra del de una combinacion y la devuelve para que este en mayuscula la primera letra
-    public static String pasarAMayusculaPimeraPalabra(String resultado) {
+    public static String pasarAMayusculaPrimeraPalabra(String resultado) {
         return resultado.substring(0,1).toUpperCase() + resultado.substring(1);
     }
 
-    public static String pluralOSingular (String denominador , int numerador,int denominador2) {
-        if (numerador == 1) {
+    public static  String pruralOSingularEspecial (String denominador,int numerador){
+        if ( denominador.equals("mig") || denominador.equals("quart") ){
+            if (numerador == 1 ) {
+                return denominador;
+            }else if (numerador > 1) {
+                return denominador + "s";
+            }
+        } else {
+            if (numerador == 1 ) {
+                return denominador;
+            }else if (numerador > 1) {
+                return denominador + "os" ;
+            }
+        }
+        return "";
+    }
+
+    public static String pluralOSingular (String denominador , int numerador) {
+        if (numerador == 1 ) {
             return denominador + "è";
         }else if (numerador > 1) {
             return denominador + "ens";
@@ -47,7 +75,7 @@ public class Fractions {
     }
 
     //Cuando le das un numero te lo tranforma en letras pero solo los 19 primeros y esto lo hace el numerador
-    public static String leerNumeradorHastaEl19(int numerador) {
+    public static String leerNumeradorHasta19(int numerador) {
         if (numerador == 1) {
             return "un";
         } else if (numerador == 2) {
@@ -97,7 +125,8 @@ public class Fractions {
 
     //hace lo mismo que la anterior pero junta un prefijo dependiendo del numero de la variable decimales + un resultado
     //que coje de la funcion anterior con la variable unidades
-    public  static String leerNumeradorHasta100(int numerador) {
+    /*
+      static String leerNumeradorHasta100(int numerador) {
         if (numerador <= 20) return leerNumeradorHastaEl19(numerador);
         int decimales = numerador / 10;
         int unidades = numerador % 10;
@@ -149,6 +178,20 @@ public class Fractions {
             return "nou-cents" + " " + leerNumeradorHasta100(decimales);
         } else if (centesima == 10) {
             return "mil" + " " + leerNumeradorHasta100(decimales);
+        }
+        return "";
+    }
+   */
+
+    public static String leerDenominadorSiEsEspecial (int denominador, int numerador) {
+        if (denominador == 1) {
+            return "";
+        } else if (denominador == 2) {
+            return "mig";
+        } else if (denominador == 3) {
+            return "terç";
+        } else if (denominador == 4) {
+            return "quart";
         }
         return "";
     }
@@ -216,6 +259,7 @@ public class Fractions {
         }
         return "";
     }
+    /*
     //hace lo mismo que la anterior pero junta un prefijo dependiendo del numero de la variable decimales + un resultado
     //que coje de la funcion anterior con la variable unidades
     public static String leerDenominadorHasta100 (int denominador,int numerador) {
@@ -291,4 +335,6 @@ public class Fractions {
         return "";
     }
 
+
+     */
 }
