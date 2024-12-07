@@ -23,16 +23,16 @@ public class Fractions {
 
         //Comprueba que los denominador no sea uno especial que en este caso serian del 1 al 4
         if (denominador <= 4) {
-            String N = leerNumeradorHasta1000(numerador);
-            String D = leerDenominadorSiEsEspecial(denominador, numerador);
+            String N = leerNumeradorHasta10000(numerador);
+            String D = leerDenominadorSiEsEspecial(denominador);
             D = pruralOSingularEspecial(D, numerador);
             String resultado = N + " " + D;
             resultado = pasarAMayusculaPrimeraPalabra(resultado);
             return resultado;
         }
 
-        String N = leerNumeradorHasta1000(numerador);
-        String D = leerDenominadorHasta1000(denominador, numerador);
+        String N = leerNumeradorHasta10000(numerador);
+        String D = leerDenominadorHasta10000(denominador, numerador);
         D = pluralOSingular(D, numerador, denominador);
 
 
@@ -211,7 +211,55 @@ public class Fractions {
         return "";
     }
 
-    public static String leerDenominadorSiEsEspecial(int denominador, int numerador) {
+    public static String leerNumeradorHasta10000(int numerador) {
+        if (numerador < 1000) return leerNumeradorHasta1000(numerador);
+        int milesimas = numerador / 1000;
+        int centesima = numerador % 1000;
+        if (milesimas == 1 && centesima == 0) {
+            return "mil" + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 1) {
+            return "mil" + " " + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 2 && centesima == 0) {
+            return "dos mil" + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 2) {
+            return "dos mil" + " " + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 3 && centesima == 0) {
+            return "tres mil" + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 3) {
+            return "tres mil" + " " + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 4 && centesima == 0 ) {
+            return "quatre mil" +  leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 4 ) {
+            return "quatre mil" + " " + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 5 && centesima == 0) {
+            return "cinc mil" + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 5 ) {
+            return "cinc mil" + " " + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 6 && centesima == 0) {
+            return "sis mil" + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 6) {
+            return "sis mil" + " " + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 7 && centesima == 0) {
+            return "set mil" + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 7) {
+            return "set mil" + " " + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 8 && centesima == 0) {
+            return "vuit mil" + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 8) {
+            return "vuit mil" + " " + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 9 && centesima == 0) {
+            return "nou mil" + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 9) {
+            return "nou mil" + " " + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 10 && centesima == 0) {
+            return "deu mil" + leerNumeradorHasta1000(centesima);
+        } else if (milesimas == 10) {
+            return "deu mil" + " " + leerNumeradorHasta1000(centesima);
+        }
+        return "";
+    }
+
+    public static String leerDenominadorSiEsEspecial(int denominador) {
         if (denominador == 1) {
             return "";
         } else if (denominador == 2) {
@@ -225,7 +273,7 @@ public class Fractions {
     }
 
     //Cuando le das un numero te lo tranforma en letras pero solo los 19 primeros te transforma los denominadores.
-    public static String leerDenominadorHasta19(int denominador, int numerador) {
+    public static String leerDenominadorHasta19(int denominador) {
         if (denominador == 1) {
             return "un";
         } else if (denominador == 2) {
@@ -272,122 +320,181 @@ public class Fractions {
 
     //hace lo mismo que la anterior pero junta un prefijo dependiendo del numero de la variable decimales + un resultado
     //que coje de la funcion anterior con la variable unidades
-    public static String leerDenominadorHasta100(int denominador, int numerador) {
-        if (denominador <= 20 && denominador != 1) return leerDenominadorHasta19(denominador, numerador);
-        if (denominador == 1) {
-            return "";
-        }
+    public static String leerDenominadorHasta100(int denominador) {
+        if (denominador <= 20) return leerDenominadorHasta19(denominador);
         int decimales = denominador / 10;
         int unidades = denominador % 10;
         if (decimales == 2) {
             if (unidades == 0) {
                 return "vint";
             }
-            return "vint-i-" + leerDenominadorHasta19(unidades, numerador);
+            return "vint-i-" + leerDenominadorHasta19(unidades);
         } else if (decimales == 3) {
             if (unidades == 0) {
                 return "trent";
             }
-            return "trenta-" + leerDenominadorHasta19(unidades, numerador);
+            return "trenta-" + leerDenominadorHasta19(unidades);
         } else if (decimales == 4) {
             if (unidades == 0) {
                 return "quarent";
             }
-            return "quaranta-" + leerDenominadorHasta19(unidades, numerador);
+            return "quaranta-" + leerDenominadorHasta19(unidades);
         } else if (decimales == 5) {
             if (unidades == 0) {
                 return "cinquant";
             }
-            return "cinquanta-" + leerDenominadorHasta19(unidades, numerador);
+            return "cinquanta-" + leerDenominadorHasta19(unidades);
         } else if (decimales == 6) {
             if (unidades == 0) {
                 return "seixant";
             }
-            return "seixanta-" + leerDenominadorHasta19(unidades, numerador);
+            return "seixanta-" + leerDenominadorHasta19(unidades);
         } else if (decimales == 7) {
             if (unidades == 0) {
                 return "setant";
             }
-            return "setanta-" + leerDenominadorHasta19(unidades, numerador);
+            return "setanta-" + leerDenominadorHasta19(unidades);
         } else if (decimales == 8) {
             if (unidades == 0) {
                 return "vuitant";
             }
-            return "vuitanta-" + leerDenominadorHasta19(unidades, numerador);
+            return "vuitanta-" + leerDenominadorHasta19(unidades);
         } else if (decimales == 9) {
             if (unidades == 0) {
                 return "norant";
             }
-            return "noranta-" + leerDenominadorHasta19(unidades, numerador);
+            return "noranta-" + leerDenominadorHasta19(unidades);
         } else if (decimales == 10) {
             if (unidades == 0) {
                 return "centèsim";
             }
-            return "centesim-" + leerDenominadorHasta19(unidades, numerador);
+            return "centesim-" + leerDenominadorHasta19(unidades);
         }
-        return "Numero incorrecto";
+        return "";
     }
 
     public static String leerDenominadorHasta1000(int denominador, int numerador) {
-        if (denominador <= 100 && denominador != 1) return leerDenominadorHasta100(denominador, numerador);
-        if (denominador == 1) {
-            return "";
-        }
+        if (denominador <= 100) return leerDenominadorHasta100(denominador);
         int centesima = denominador / 100;
         int decimales = denominador % 100;
+        if (esPoTenciaDeDiez(denominador)){
+            return "mil·lèsim";
+        }
         if (centesima == 1) {
             if (numerador == 1 && decimales == 0) {
                 return "centèsim";
             }
-            return "cent" + " " + leerDenominadorHasta100(decimales, numerador);
+            return "cent" + " " + leerDenominadorHasta100(decimales);
         }else if (centesima == 2) {
             if (numerador == 1 && decimales == 0) {
                 return "dos-centèsim";
             }
-            return "dos-cents" + " " + leerDenominadorHasta100(decimales, numerador);
+            return "dos-cents" + " " + leerDenominadorHasta100(decimales);
         }else if (centesima == 3) {
             if (numerador == 1 && decimales == 0) {
                 return "tres-centèsim";
             }
-            return "tres-cents" + " " + leerDenominadorHasta100(decimales, numerador);
+            return "tres-cents" + " " + leerDenominadorHasta100(decimales);
         }else if (centesima == 4) {
             if (numerador == 1 && decimales == 0) {
                 return "quatre-centèsim";
             }
-            return "quatre-cents" + " " + leerDenominadorHasta100(decimales, numerador);
+            return "quatre-cents" + " " + leerDenominadorHasta100(decimales);
         }else if (centesima == 5) {
             if (numerador == 1 && decimales == 0) {
                 return "cinc-centèsim";
             }
-            return "cinc-cents" + " " + leerDenominadorHasta100(decimales, numerador);
+            return "cinc-cents" + " " + leerDenominadorHasta100(decimales);
         }else if (centesima == 6) {
             if (numerador == 1 && decimales == 0) {
                 return "sis-centèsim";
             }
-            return "sis-cents" + " " + leerDenominadorHasta100(decimales, numerador);
+            return "sis-cents" + " " + leerDenominadorHasta100(decimales);
         } else if (centesima == 7) {
             if (numerador == 1 && decimales == 0) {
                 return "set-centèsim";
             }
-            return "set-cents" + " " + leerDenominadorHasta100(decimales, numerador);
+            return "set-cents" + " " + leerDenominadorHasta100(decimales);
         }else if (centesima == 8) {
             if (numerador == 1 && decimales == 0) {
                 return "vuit-centèsim";
             }
-            return "vuit-cents" + " " + leerDenominadorHasta100(decimales, numerador);
+            return "vuit-cents" + " " + leerDenominadorHasta100(decimales);
         } else if (centesima == 9) {
             if (numerador == 1 && decimales == 0) {
                 return "nou-centèsim";
             }
-            return "nou-cents" + " " + leerDenominadorHasta100(decimales, numerador);
+            return "nou-cents" + " " + leerDenominadorHasta100(decimales);
         }else if (centesima == 10) {
             if (numerador == 1 && decimales == 0) {
                 return "mil·lèsim";
             }
-            return "mil" + " " + leerDenominadorHasta100(decimales, numerador);
+            return "mil" + " " + leerDenominadorHasta100(decimales);
         }
         return "";
     }
+
+    public static String leerDenominadorHasta10000(int denominador, int numerador) {
+        if (denominador <= 1000 && denominador != 1) return leerDenominadorHasta1000(denominador, numerador);
+        if (denominador == 1) {
+            return "";
+        }
+        int milesimas = denominador / 1000;
+        int centesimas = denominador % 1000;
+        if (milesimas == 1) {
+            if (numerador == 1 && centesimas == 0) {
+                return "mil·lèsim";
+            }
+            return "mil" + " " + leerDenominadorHasta1000(centesimas, numerador);
+        }else if (milesimas == 2) {
+            if (numerador == 1 && centesimas == 0) {
+                return "dos mil·lèsim";
+            }
+            return "dos mil·lèsim" + " " + leerDenominadorHasta1000(centesimas, numerador);
+        }else if (milesimas == 3) {
+            if (numerador == 1 && centesimas == 0) {
+                return "tres mil·lèsim";
+            }
+            return "tres mil·lèsim" + " " + leerDenominadorHasta1000(centesimas, numerador);
+        }else if (milesimas == 4) {
+            if (numerador == 1 && centesimas == 0) {
+                return "quatre mil·lèsim";
+            }
+            return "quatre mil·lèsim" + " " + leerDenominadorHasta1000(centesimas, numerador);
+        }else if (milesimas == 5) {
+            if (numerador == 1 && centesimas == 0) {
+                return "cinc mil·lèsim";
+            }
+            return "cinc mil·lèsim" + " " + leerDenominadorHasta10000(centesimas, numerador);
+        }else if (milesimas == 6) {
+            if (numerador == 1 && centesimas == 0) {
+                return "sis mil·lèsim";
+            }
+            return "sis mil·lèsim" + " " + leerDenominadorHasta1000(centesimas, numerador);
+        } else if (milesimas == 7) {
+            if (numerador == 1 && centesimas == 0) {
+                return "set mil·lèsim";
+            }
+            return "set mil·lèsim" + " " + leerDenominadorHasta1000(centesimas, numerador);
+        }else if (milesimas == 8) {
+            if (numerador == 1 && centesimas == 0) {
+                return "vuit mil·lèsim";
+            }
+            return "vuit mil·lèsim" + " " + leerDenominadorHasta1000(centesimas, numerador);
+        } else if (milesimas == 9) {
+            if (numerador == 1 && centesimas == 0) {
+                return "nou mil·lèsim";
+            }
+            return "nou mil·lèsim" + " " + leerDenominadorHasta1000(centesimas, numerador);
+        }else if (milesimas == 10) {
+            if (numerador == 1 && centesimas == 0) {
+                return "deu mil·lèsim";
+            }
+            return "deu mil" + " " + leerDenominadorHasta1000(centesimas, numerador);
+        }
+        return "";
+    }
+
 
 
 }
