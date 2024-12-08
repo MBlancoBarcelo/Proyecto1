@@ -23,7 +23,7 @@ public class Fractions {
 
         //Comprueba que los denominador no sea uno especial que en este caso serian del 1 al 4
         if (denominador <= 4) {
-            String N = leerNumeradorHasta1000000(numerador);
+            String N = leerNumeradorHasta9999999(numerador);
             String D = leerDenominadorSiEsEspecial(denominador);
             D = pruralOSingularEspecial(D, numerador);
             String resultado = N + " " + D;
@@ -31,8 +31,8 @@ public class Fractions {
             return resultado;
         }
 
-        String N = leerNumeradorHasta1000000(numerador);
-        String D = leerDenominadorHasta100000(denominador, numerador);
+        String N = leerNumeradorHasta9999999(numerador);
+        String D = leerDenominadorHasta9999999(denominador, numerador);
         D = pluralOSingular(D, numerador, denominador);
 
 
@@ -194,15 +194,15 @@ public class Fractions {
         int milesimas = numerador / 10000;
         int centesima = numerador % 10000;
         return switch (milesimas) {
-            case 2 -> "vint" + (centesima == 0 ? "" : "-i-" + leerNumeradorHasta20000(numerador));
-            case 3 -> "trenta" + (centesima == 0 ? "" : "-" + leerNumeradorHasta20000(numerador));
-            case 4 -> "quaranta" + (centesima == 0 ? "" : "-" + leerNumeradorHasta20000(numerador));
-            case 5 -> "cinquanta" + (centesima == 0 ? "" : "-" + leerNumeradorHasta20000(numerador));
-            case 6 -> "seixanta" + (centesima == 0 ? "" : "-" + leerNumeradorHasta20000(numerador));
-            case 7 -> "setanta" + (centesima == 0 ? "" : "-" + leerNumeradorHasta20000(numerador));
-            case 8 -> "vuitanta" + (centesima == 0 ? "" : "-" + leerNumeradorHasta20000(numerador));
-            case 9 -> "noranta" + (centesima == 0 ? "" : "-" + leerNumeradorHasta20000(numerador));
-            case 10 -> "cent" + (centesima == 0 ? "" : " " + leerNumeradorHasta20000(numerador));
+            case 2 -> "vint" + (centesima == 0 ? "mil" : "-i-" + leerNumeradorHasta20000(numerador));
+            case 3 -> "trenta" + (centesima == 0 ? "mil" : "-" + leerNumeradorHasta20000(numerador));
+            case 4 -> "quaranta" + (centesima == 0 ? "mil" : "-" + leerNumeradorHasta20000(numerador));
+            case 5 -> "cinquanta" + (centesima == 0 ? "mil" : "-" + leerNumeradorHasta20000(numerador));
+            case 6 -> "seixanta" + (centesima == 0 ? "mil" : "-" + leerNumeradorHasta20000(numerador));
+            case 7 -> "setanta" + (centesima == 0 ? "mil" : "-" + leerNumeradorHasta20000(numerador));
+            case 8 -> "vuitanta" + (centesima == 0 ? "mil" : "-" + leerNumeradorHasta20000(numerador));
+            case 9 -> "noranta" + (centesima == 0 ? "mil" : "-" + leerNumeradorHasta20000(numerador));
+            case 10 -> "cent" + (centesima == 0 ? "mil" : " " + leerNumeradorHasta20000(numerador));
             default ->  "";
         };
     }
@@ -212,15 +212,34 @@ public class Fractions {
         int milesimas = numerador / 100000;
         int centesima = numerador % 100000;
         return switch (milesimas) {
-            case 1 -> "un milliò" + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
-            case 2 -> "dos millions" + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
-            case 3 -> "tres millions" + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
-            case 4 -> "quatre milliò" + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
-            case 5 -> "cinque millions" + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
-            case 6 -> "sis millions" + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
-            case 7 -> "set milliò" + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
-            case 8 -> "vuit millions" + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
-            case 9 -> "nou millions" + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
+            case 1 -> "cent " + (centesima == 0 ? "mil" : "mil " + leerNumeradorHasta100000(numerador));
+            case 2 -> "dos-cents " + (centesima == 0 ? "mil" : "mil " + leerNumeradorHasta100000(numerador));
+            case 3 -> "tres-cents " + (centesima == 0 ? "mil" : "mil " + leerNumeradorHasta100000(numerador));
+            case 4 -> "quatre-cents " + (centesima == 0 ? "mil" : "mil " + leerNumeradorHasta100000(numerador));
+            case 5 -> "cinc-cents " + (centesima == 0 ? "mil" : "mil " + leerNumeradorHasta100000(numerador));
+            case 6 -> "sis-cents " + (centesima == 0 ? "mil" : "mil " + leerNumeradorHasta100000(numerador));
+            case 7 -> "set-cents " + (centesima == 0 ? "mil" : "mil " + leerNumeradorHasta100000(numerador));
+            case 8 -> "vuit-cents " + (centesima == 0 ? "mil" : "mil " + leerNumeradorHasta100000(numerador));
+            case 9 -> "nou-cents " + (centesima == 0 ? "mil" : "mil " + leerNumeradorHasta100000(numerador));
+            case 10 -> "un miliò" + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
+            default -> "";
+        };
+    }
+
+    public static String leerNumeradorHasta9999999(int numerador) {
+        if (numerador < 1000000) return leerNumeradorHasta1000000(numerador);
+        int milesimas = numerador / 1000000;
+        int centesima = numerador % 1000000;
+        return switch (milesimas) {
+            case 1 -> "un miliò " + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
+            case 2 -> "dos milions " + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
+            case 3 -> "tres milions " + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
+            case 4 -> "quatre milions " + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
+            case 5 -> "cinc milions " + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
+            case 6 -> "sis milions " + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
+            case 7 -> "set miliò " + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
+            case 8 -> "vuit milions " + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
+            case 9 -> "nou milions " + (centesima == 0 ? "" : " " + leerNumeradorHasta100000(numerador));
             default -> "";
         };
     }
@@ -357,6 +376,47 @@ public class Fractions {
         };
     }
 
+    public static String leerDenominadorHasta1000000(int denominador, int numerador) {
+        if (denominador < 100000 && denominador != 1 ) return leerDenominadorHasta20000(denominador,numerador);
+        if (denominador == 1) {
+            return "";
+        }
+        int milesimas = denominador / 100000;
+        int centesimas = denominador % 100000;
+        return switch (milesimas) {
+            case 2 -> (numerador == 1 && centesimas == 0) ? "dos-cents mil·lèsim" : "dos-cents mil " + leerDenominadorHasta100000(denominador, numerador);
+            case 3 -> (numerador == 1 && centesimas == 0) ? "tres-cents mil·lèsim" : "tres-cents mil " + leerDenominadorHasta100000(denominador, numerador);
+            case 4 -> (numerador == 1 && centesimas == 0) ? "quatre-cents mil·lèsim" : "quatre-cents mil " + leerDenominadorHasta100000(denominador, numerador);
+            case 5 -> (numerador == 1 && centesimas == 0) ? "cinc-cents mil·lèsim" : "cinc-cents mil " + leerDenominadorHasta100000(denominador, numerador);
+            case 6 -> (numerador == 1 && centesimas == 0) ? "sis-cents mil·lèsim" : "sis-cents mil " + leerDenominadorHasta100000(denominador, numerador);
+            case 7 -> (numerador == 1 && centesimas == 0) ? "set-cents mil·lèsim" : "set-cents mil " + leerDenominadorHasta100000(denominador, numerador);
+            case 8 -> (numerador == 1 && centesimas == 0) ? "vuit-cents mil·lèsim" : "vuit-cents mil " + leerDenominadorHasta100000(denominador, numerador);
+            case 9 -> (numerador == 1 && centesimas == 0) ? "nou-cents mil·lèsim" : "nou-cents mil " + leerDenominadorHasta100000(denominador, numerador);
+            case 10 -> (numerador == 1 && centesimas == 0) ? "un milionèsim" : "un milio " + leerDenominadorHasta100000(denominador, numerador);
+            default -> "";
+        };
+    }
+
+    public static String leerDenominadorHasta9999999(int denominador, int numerador) {
+        if (denominador < 1000000 && denominador != 1 ) return leerDenominadorHasta20000(denominador,numerador);
+        if (denominador == 1) {
+            return "";
+        }
+        int milesimas = denominador / 1000000;
+        int centesimas = denominador % 1000000;
+        return switch (milesimas) {
+            case 1 -> (numerador == 1 && centesimas == 0) ? "milionèsim" : "milionèsim" + leerDenominadorHasta100000(denominador, numerador);
+            case 2 -> (numerador == 1 && centesimas == 0) ? "dos milionèsim" : "dos milions " + leerDenominadorHasta1000000(denominador, numerador);
+            case 3 -> (numerador == 1 && centesimas == 0) ? "tres milionèsim" : "tres milions " + leerDenominadorHasta1000000(denominador, numerador);
+            case 4 -> (numerador == 1 && centesimas == 0) ? "quatre milionèsim" : "quatre milions " + leerDenominadorHasta1000000(denominador, numerador);
+            case 5 -> (numerador == 1 && centesimas == 0) ? "cinc milionèsim" : "cinc milions " + leerDenominadorHasta1000000(denominador, numerador);
+            case 6 -> (numerador == 1 && centesimas == 0) ? "sis milionèsim" : "sis milions " + leerDenominadorHasta1000000(denominador, numerador);
+            case 7 -> (numerador == 1 && centesimas == 0) ? "set milionèsim" : "set milions " + leerDenominadorHasta1000000(denominador, numerador);
+            case 8 -> (numerador == 1 && centesimas == 0) ? "vuit milionèsim" : "vuit milions " + leerDenominadorHasta1000000(denominador, numerador);
+            case 9 -> (numerador == 1 && centesimas == 0) ? "nou milionèsim" : "nou milions " + leerDenominadorHasta1000000(denominador, numerador);
+            default -> "";
+        };
+    }
 
 
 }
