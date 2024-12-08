@@ -23,7 +23,7 @@ public class Fractions {
 
         //Comprueba que los denominador no sea uno especial que en este caso serian del 1 al 4
         if (denominador <= 4) {
-            String N = leerNumeradorHasta10000(numerador);
+            String N = leerNumeradorHasta100000(numerador);
             String D = leerDenominadorSiEsEspecial(denominador);
             D = pruralOSingularEspecial(D, numerador);
             String resultado = N + " " + D;
@@ -31,7 +31,7 @@ public class Fractions {
             return resultado;
         }
 
-        String N = leerNumeradorHasta10000(numerador);
+        String N = leerNumeradorHasta100000(numerador);
         String D = leerDenominadorHasta10000(denominador, numerador);
         D = pluralOSingular(D, numerador, denominador);
 
@@ -152,7 +152,6 @@ public class Fractions {
             case 7 -> "set-cents" + (decimales == 0 ? "" : " " + leerNumeradorHasta100(decimales));
             case 8 -> "vuit-cents" + (decimales == 0 ? "" : " " + leerNumeradorHasta100(decimales));
             case 9 -> "nou-cents" + (decimales == 0 ? "" : " " + leerNumeradorHasta100(decimales));
-            case 10 -> "mil" + (decimales == 0 ? "" : " " + leerNumeradorHasta100(decimales));
             default -> "";
         };
     }
@@ -171,185 +170,102 @@ public class Fractions {
             case 7 -> "set mil" + (centesima == 0 ? "" : " " + leerNumeradorHasta1000(centesima));
             case 8 -> "vuit mil" + (centesima == 0 ? "" : " " + leerNumeradorHasta1000(centesima));
             case 9 -> "nou mil" + (centesima == 0 ? "" : " " + leerNumeradorHasta1000(centesima));
-            case 10 -> "deu mil" + (centesima == 0 ? "" : " " + leerNumeradorHasta1000(centesima));
             default -> "";
+        };
+    }
+
+    public static String leerNumeradorHasta100000(int numerador) {
+        if (numerador < 10000) return leerNumeradorHasta10000(numerador);
+        int milesimas = numerador / 10000;
+        int centesima = numerador % 10000;
+        return switch (milesimas) {
+            case 1 -> "deu" + (centesima == 0 ? "" : "-" + leerNumeradorHasta10000(numerador));
+            case 2 -> "vint" + (centesima == 0 ? "" : "-i-" + leerNumeradorHasta10000(numerador));
+            case 3 -> "trenta" + (centesima == 0 ? "" : "-" + leerNumeradorHasta10000(numerador));
+            case 4 -> "quaranta" + (centesima == 0 ? "" : "-" + leerNumeradorHasta100000(numerador));
+            case 5 -> "cinquanta" + (centesima == 0 ? "" : "-" + leerNumeradorHasta10000(numerador));
+            case 6 -> "seixanta" + (centesima == 0 ? "" : "-" + leerNumeradorHasta10000(numerador));
+            case 7 -> "setanta" + (centesima == 0 ? "" : "-" + leerNumeradorHasta10000(numerador));
+            case 8 -> "vuitanta" + (centesima == 0 ? "" : "-" + leerNumeradorHasta100000(numerador));
+            case 9 -> "noranta" + (centesima == 0 ? "" : "-" + leerNumeradorHasta10000(numerador));
+            default ->  "";
         };
     }
 
 
     public static String leerDenominadorSiEsEspecial(int denominador) {
-        if (denominador == 1) {
-            return "";
-        } else if (denominador == 2) {
-            return "mig";
-        } else if (denominador == 3) {
-            return "terç";
-        } else if (denominador == 4) {
-            return "quart";
-        }
-        return "";
+        return switch (denominador) {
+            case 2 -> "mig";
+            case 3 -> "terç";
+            case 4 -> "quart";
+            default -> "";
+        };
     }
 
-    //Cuando le das un numero te lo tranforma en letras pero solo los 19 primeros te transforma los denominadores.
     public static String leerDenominadorHasta19(int denominador) {
-        if (denominador == 1) {
-            return "un";
-        } else if (denominador == 2) {
-            return "dos";
-        } else if (denominador == 3) {
-            return "tres";
-        } else if (denominador == 4) {
-            return "quatr";
-        } else if (denominador == 5) {
-            return "cinqu";
-        } else if (denominador == 6) {
-            return "sis";
-        } else if (denominador == 7) {
-            return "set";
-        } else if (denominador == 8) {
-            return "vuit";
-        } else if (denominador == 9) {
-            return "nov";
-        } else if (denominador == 10) {
-            return "dècim";
-        } else if (denominador == 11) {
-            return "onz";
-        } else if (denominador == 12) {
-            return "dotz";
-        } else if (denominador == 13) {
-            return "tretz";
-        } else if (denominador == 14) {
-            return "catorz";
-        } else if (denominador == 15) {
-            return "quinz";
-        } else if (denominador == 16) {
-            return "setz";
-        } else if (denominador == 17) {
-            return "disset";
-        } else if (denominador == 18) {
-            return "divuit";
-        } else if (denominador == 19) {
-            return "dinov";
-        } else if (denominador == 20) {
-            return "vint";
-        }
-        return "";
+        return switch (denominador) {
+            case 1 -> "un";
+            case 2 -> "dos";
+            case 3 -> "tres";
+            case 4 -> "quatr";
+            case 5 -> "cinqu";
+            case 6 -> "sis";
+            case 7 -> "set";
+            case 8 -> "vuit";
+            case 9 -> "nov";
+            case 10 -> "dècim";
+            case 11 -> "onz";
+            case 12 -> "dotz";
+            case 13 -> "tretz";
+            case 14 -> "catorz";
+            case 15 -> "quinz";
+            case 16 -> "setz";
+            case 17 -> "disset";
+            case 18 -> "divuit";
+            case 19 -> "dinov";
+            case 20 -> "vint";
+            default -> "";
+        };
     }
 
-    //hace lo mismo que la anterior pero junta un prefijo dependiendo del numero de la variable decimales + un resultado
-    //que coje de la funcion anterior con la variable unidades
     public static String leerDenominadorHasta100(int denominador) {
         if (denominador <= 20) return leerDenominadorHasta19(denominador);
         int decimales = denominador / 10;
         int unidades = denominador % 10;
-        if (decimales == 2) {
-            if (unidades == 0) {
-                return "vint";
-            }
-            return "vint-i-" + leerDenominadorHasta19(unidades);
-        } else if (decimales == 3) {
-            if (unidades == 0) {
-                return "trent";
-            }
-            return "trenta-" + leerDenominadorHasta19(unidades);
-        } else if (decimales == 4) {
-            if (unidades == 0) {
-                return "quarent";
-            }
-            return "quaranta-" + leerDenominadorHasta19(unidades);
-        } else if (decimales == 5) {
-            if (unidades == 0) {
-                return "cinquant";
-            }
-            return "cinquanta-" + leerDenominadorHasta19(unidades);
-        } else if (decimales == 6) {
-            if (unidades == 0) {
-                return "seixant";
-            }
-            return "seixanta-" + leerDenominadorHasta19(unidades);
-        } else if (decimales == 7) {
-            if (unidades == 0) {
-                return "setant";
-            }
-            return "setanta-" + leerDenominadorHasta19(unidades);
-        } else if (decimales == 8) {
-            if (unidades == 0) {
-                return "vuitant";
-            }
-            return "vuitanta-" + leerDenominadorHasta19(unidades);
-        } else if (decimales == 9) {
-            if (unidades == 0) {
-                return "norant";
-            }
-            return "noranta-" + leerDenominadorHasta19(unidades);
-        } else if (decimales == 10) {
-            if (unidades == 0) {
-                return "centèsim";
-            }
-            return "centesim-" + leerDenominadorHasta19(unidades);
-        }
-        return "";
+        return switch (decimales) {
+            case 2 -> unidades == 0 ? "vint" : "vint-i-" + leerDenominadorHasta19(unidades);
+            case 3 -> unidades == 0 ? "trent" : "trenta-" + leerDenominadorHasta19(unidades);
+            case 4 -> unidades == 0 ? "quarent" : "quaranta-" + leerDenominadorHasta19(unidades);
+            case 5 -> unidades == 0 ? "cinquant" : "cinquanta-" + leerDenominadorHasta19(unidades);
+            case 6 -> unidades == 0 ? "seixant" : "seixanta-" + leerDenominadorHasta19(unidades);
+            case 7 -> unidades == 0 ? "setant" : "setanta-" + leerDenominadorHasta19(unidades);
+            case 8 -> unidades == 0 ? "vuitant" : "vuitanta-" + leerDenominadorHasta19(unidades);
+            case 9 -> unidades == 0 ? "norant" : "noranta-" + leerDenominadorHasta19(unidades);
+            case 10 -> unidades == 0 ? "centèsim" : "centesim-" + leerDenominadorHasta19(unidades);
+            default -> "";
+        };
     }
 
     public static String leerDenominadorHasta1000(int denominador, int numerador) {
         if (denominador <= 100) return leerDenominadorHasta100(denominador);
         int centesima = denominador / 100;
         int decimales = denominador % 100;
-        if (esPotenciaDeDiez(denominador)){
+        if (esPotenciaDeDiez(denominador)) {
             return "mil·lèsim";
         }
-        if (centesima == 1) {
-            if (numerador == 1 && decimales == 0) {
-                return "centèsim";
-            }
-            return "cent" + " " + leerDenominadorHasta100(decimales);
-        }else if (centesima == 2) {
-            if (numerador == 1 && decimales == 0) {
-                return "dos-centèsim";
-            }
-            return "dos-cents" + " " + leerDenominadorHasta100(decimales);
-        }else if (centesima == 3) {
-            if (numerador == 1 && decimales == 0) {
-                return "tres-centèsim";
-            }
-            return "tres-cents" + " " + leerDenominadorHasta100(decimales);
-        }else if (centesima == 4) {
-            if (numerador == 1 && decimales == 0) {
-                return "quatre-centèsim";
-            }
-            return "quatre-cents" + " " + leerDenominadorHasta100(decimales);
-        }else if (centesima == 5) {
-            if (numerador == 1 && decimales == 0) {
-                return "cinc-centèsim";
-            }
-            return "cinc-cents" + " " + leerDenominadorHasta100(decimales);
-        }else if (centesima == 6) {
-            if (numerador == 1 && decimales == 0) {
-                return "sis-centèsim";
-            }
-            return "sis-cents" + " " + leerDenominadorHasta100(decimales);
-        } else if (centesima == 7) {
-            if (numerador == 1 && decimales == 0) {
-                return "set-centèsim";
-            }
-            return "set-cents" + " " + leerDenominadorHasta100(decimales);
-        }else if (centesima == 8) {
-            if (numerador == 1 && decimales == 0) {
-                return "vuit-centèsim";
-            }
-            return "vuit-cents" + " " + leerDenominadorHasta100(decimales);
-        } else if (centesima == 9) {
-            if (numerador == 1 && decimales == 0) {
-                return "nou-centèsim";
-            }
-            return "nou-cents" + " " + leerDenominadorHasta100(decimales);
-        }else if (centesima == 10) {
-            if (numerador == 1 && decimales == 0) {
-                return "mil·lèsim";
-            }
-            return "mil" + " " + leerDenominadorHasta100(decimales);
-        }
-        return "";
+        return switch (centesima) {
+            case 1 -> (numerador == 1 && decimales == 0) ? "centèsim" : "cent " + leerDenominadorHasta100(decimales);
+            case 2 -> (numerador == 1 && decimales == 0) ? "dos-centèsim" : "dos-cents " + leerDenominadorHasta100(decimales);
+            case 3 -> (numerador == 1 && decimales == 0) ? "tres-centèsim" : "tres-cents " + leerDenominadorHasta100(decimales);
+            case 4 -> (numerador == 1 && decimales == 0) ? "quatre-centèsim" : "quatre-cents " + leerDenominadorHasta100(decimales);
+            case 5 -> (numerador == 1 && decimales == 0) ? "cinc-centèsim" : "cinc-cents " + leerDenominadorHasta100(decimales);
+            case 6 -> (numerador == 1 && decimales == 0) ? "sis-centèsim" : "sis-cents " + leerDenominadorHasta100(decimales);
+            case 7 -> (numerador == 1 && decimales == 0) ? "set-centèsim" : "set-cents " + leerDenominadorHasta100(decimales);
+            case 8 -> (numerador == 1 && decimales == 0) ? "vuit-centèsim" : "vuit-cents " + leerDenominadorHasta100(decimales);
+            case 9 -> (numerador == 1 && decimales == 0) ? "nou-centèsim" : "nou-cents " + leerDenominadorHasta100(decimales);
+            case 10 -> (numerador == 1 && decimales == 0) ? "mil·lèsim" : "mil " + leerDenominadorHasta100(decimales);
+            default -> "";
+        };
     }
 
     public static String leerDenominadorHasta10000(int denominador, int numerador) {
@@ -359,59 +275,22 @@ public class Fractions {
         }
         int milesimas = denominador / 1000;
         int centesimas = denominador % 1000;
-        if (milesimas == 1) {
-            if (numerador == 1 && centesimas == 0) {
-                return "mil·lèsim";
-            }
-            return "mil" + " " + leerDenominadorHasta1000(centesimas, numerador);
-        }else if (milesimas == 2) {
-            if (numerador == 1 && centesimas == 0) {
-                return "dos mil·lèsim";
-            }
-            return "dos mil·lèsim" + " " + leerDenominadorHasta1000(centesimas, numerador);
-        }else if (milesimas == 3) {
-            if (numerador == 1 && centesimas == 0) {
-                return "tres mil·lèsim";
-            }
-            return "tres mil·lèsim" + " " + leerDenominadorHasta1000(centesimas, numerador);
-        }else if (milesimas == 4) {
-            if (numerador == 1 && centesimas == 0) {
-                return "quatre mil·lèsim";
-            }
-            return "quatre mil·lèsim" + " " + leerDenominadorHasta1000(centesimas, numerador);
-        }else if (milesimas == 5) {
-            if (numerador == 1 && centesimas == 0) {
-                return "cinc mil·lèsim";
-            }
-            return "cinc mil·lèsim" + " " + leerDenominadorHasta10000(centesimas, numerador);
-        }else if (milesimas == 6) {
-            if (numerador == 1 && centesimas == 0) {
-                return "sis mil·lèsim";
-            }
-            return "sis mil·lèsim" + " " + leerDenominadorHasta1000(centesimas, numerador);
-        } else if (milesimas == 7) {
-            if (numerador == 1 && centesimas == 0) {
-                return "set mil·lèsim";
-            }
-            return "set mil·lèsim" + " " + leerDenominadorHasta1000(centesimas, numerador);
-        }else if (milesimas == 8) {
-            if (numerador == 1 && centesimas == 0) {
-                return "vuit mil·lèsim";
-            }
-            return "vuit mil·lèsim" + " " + leerDenominadorHasta1000(centesimas, numerador);
-        } else if (milesimas == 9) {
-            if (numerador == 1 && centesimas == 0) {
-                return "nou mil·lèsim";
-            }
-            return "nou mil·lèsim" + " " + leerDenominadorHasta1000(centesimas, numerador);
-        }else if (milesimas == 10) {
-            if (numerador == 1 && centesimas == 0) {
-                return "deu mil·lèsim";
-            }
-            return "deu mil" + " " + leerDenominadorHasta1000(centesimas, numerador);
-        }
-        return "";
+        return switch (milesimas) {
+            case 1 -> (numerador == 1 && centesimas == 0) ? "mil·lèsim" : "mil " + leerDenominadorHasta1000(centesimas, numerador);
+            case 2 -> (numerador == 1 && centesimas == 0) ? "dos mil·lèsim" : "dos mil·lèsim " + leerDenominadorHasta1000(centesimas, numerador);
+            case 3 -> (numerador == 1 && centesimas == 0) ? "tres mil·lèsim" : "tres mil·lèsim " + leerDenominadorHasta1000(centesimas, numerador);
+            case 4 -> (numerador == 1 && centesimas == 0) ? "quatre mil·lèsim" : "quatre mil·lèsim " + leerDenominadorHasta1000(centesimas, numerador);
+            case 5 -> (numerador == 1 && centesimas == 0) ? "cinc mil·lèsim" : "cinc mil·lèsim " + leerDenominadorHasta10000(centesimas, numerador);
+            case 6 -> (numerador == 1 && centesimas == 0) ? "sis mil·lèsim" : "sis mil·lèsim " + leerDenominadorHasta1000(centesimas, numerador);
+            case 7 -> (numerador == 1 && centesimas == 0) ? "set mil·lèsim" : "set mil·lèsim " + leerDenominadorHasta1000(centesimas, numerador);
+            case 8 -> (numerador == 1 && centesimas == 0) ? "vuit mil·lèsim" : "vuit mil·lèsim " + leerDenominadorHasta1000(centesimas, numerador);
+            case 9 -> (numerador == 1 && centesimas == 0) ? "nou mil·lèsim" : "nou mil·lèsim " + leerDenominadorHasta1000(centesimas, numerador);
+            case 10 -> (numerador == 1 && centesimas == 0) ? "deu mil·lèsim" : "deu mil " + leerDenominadorHasta1000(centesimas, numerador);
+            default -> "";
+        };
     }
+
+
 
 
 
