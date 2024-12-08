@@ -32,7 +32,7 @@ public class Fractions {
         }
 
         String N = leerNumeradorHasta100000(numerador);
-        String D = leerDenominadorHasta10000(denominador, numerador);
+        String D = leerDenominadorHasta100000(denominador, numerador);
         D = pluralOSingular(D, numerador, denominador);
 
 
@@ -247,7 +247,7 @@ public class Fractions {
     }
 
     public static String leerDenominadorHasta1000(int denominador, int numerador) {
-        if (denominador <= 100) return leerDenominadorHasta100(denominador);
+        if (denominador < 100) return leerDenominadorHasta100(denominador);
         int centesima = denominador / 100;
         int decimales = denominador % 100;
         if (esPotenciaDeDiez(denominador)) {
@@ -269,7 +269,7 @@ public class Fractions {
     }
 
     public static String leerDenominadorHasta10000(int denominador, int numerador) {
-        if (denominador <= 1000 && denominador != 1) return leerDenominadorHasta1000(denominador, numerador);
+        if (denominador < 1000 && denominador != 1) return leerDenominadorHasta1000(denominador, numerador);
         if (denominador == 1) {
             return "";
         }
@@ -290,7 +290,17 @@ public class Fractions {
         };
     }
 
-
+    public static String leerDenominadorHasta100000(int denominador, int numerador) {
+        if (denominador < 10000 && denominador != 1 ) return leerDenominadorHasta10000(denominador,numerador);
+        if (denominador == 1) {
+            return "";
+        }
+        int milesimas = denominador / 10000;
+        int centesimas = denominador % 10000;
+        return switch (milesimas) {
+            case 1 -> (numerador == 1 && centesimas == 0) ? ""
+        }
+    }
 
 
 
