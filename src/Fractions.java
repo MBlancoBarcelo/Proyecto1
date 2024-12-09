@@ -488,7 +488,7 @@ public class Fractions {
         }
     }
 
-    public static String leerDenominadorHasta9999999(int denominador, int numerador) {
+    public static String leerDenominadorHasta9999999(int denominador) {
         if (denominador < 1000000 && denominador != 1 ) return leerDenominadorHasta1000000(denominador);
         if (denominador == 1) {
             return "";
