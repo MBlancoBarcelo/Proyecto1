@@ -102,30 +102,38 @@ public class Fractions {
 
     public static boolean esPotenciaDeDiez(int denominador) {
         int contador = 0;
+        int numeroDenominador = denominador;
         if (denominador < 20) {
-            return false;
+            return comprovacionDe10(numeroDenominador);
         }
         while ((denominador / 10 != 0))  {
             denominador /= 10;
             contador++;
         }
         return switch (contador) {
-         case 1 -> comprovacionDe10(denominador);
-         case 2 ->comprovacionDe100(denominador/100);
-         case 3 ->comprovacionDe1000(denominador/1000);
-         case 4 ->comprovacionDe10000(denominador/10000);
-            default -> false;
+         case 1 -> comprovacionDe10(numeroDenominador);
+         case 2 -> comprovacionDe100(numeroDenominador%100);
+         case 3 -> comprovacionDe1000(numeroDenominador%1000);
+         case 4 -> comprovacionDe10000(numeroDenominador%10000);
+         case 5 -> comprovacionDe100000(numeroDenominador%100000);
+         case 6 -> comprovacionDe1000000(numeroDenominador%1000000);
+         default -> false;
         };
     }
 
     public static boolean comprovacionDe10(int denominador) {
+        if (denominador == 0) {
+            return true;
+        }
         while (denominador % 10 == 0) {
             denominador /= 10;
         }
         return denominador == 1;
     }
-
     public static boolean comprovacionDe100(int denominador) {
+        if (denominador == 0) {
+            return true;
+        }
         while (denominador % 10 == 0) {
             denominador /= 10;
         }
@@ -133,17 +141,64 @@ public class Fractions {
     }
 
     public static boolean comprovacionDe1000(int denominador) {
+        if (denominador == 1) {
+            return false;
+        }
+        if (denominador == 0) {
+            return true;
+        }
         while (denominador % 10 == 0) {
             denominador /= 10;
         }
-        return denominador == 1;
+        return true;
     }
 
     public static boolean comprovacionDe10000(int denominador) {
+        if (denominador == 0) {
+            return true;
+        }
+        if ((denominador >= 1) && (denominador <= 9)) {
+            return false;
+        }
+        if ((denominador >= 1000))  {
+            return false;
+        }
         while (denominador % 10 == 0) {
             denominador /= 10;
         }
-        return denominador == 1;
+        return true;
+    }
+
+    public static boolean comprovacionDe100000(int denominador){
+        if (denominador == 0) {
+            return true;
+        }
+        if ((denominador >= 1) && (denominador <= 9)) {
+            return false;
+        }
+        if ((denominador >= 10000))  {
+            return false;
+        }
+        while (denominador % 10 == 0) {
+            denominador /= 10;
+        }
+        return true;
+    }
+
+    public static boolean comprovacionDe1000000(int denominador){
+        if (denominador == 0) {
+            return true;
+        }
+        if ((denominador >= 1) && (denominador <= 9)) {
+            return false;
+        }
+        if ((denominador >= 10000))  {
+            return false;
+        }
+        while (denominador % 10 == 0) {
+            denominador /= 10;
+        }
+        return true;
     }
 
     public static String manejarPotenciaDeDiez(String denominador, int numerador) {
