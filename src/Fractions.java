@@ -31,7 +31,7 @@ public class Fractions {
         }
 
         String N = leerNumeradorHasta9999999(numerador);
-        String D = leerDenominadorHasta9999999(denominador, numerador);
+        String D = leerDenominadorHasta9999999(denominador);
         D = pluralOSingular(D, numerador, denominador);
 
 
@@ -54,7 +54,7 @@ public class Fractions {
             numerador = resto;
             String NE = leerNumeradorHasta9999999(numeroentero);
             String N = leerNumeradorHasta9999999(numerador);
-            String D = leerDenominadorHasta9999999(denominador, numerador);
+            String D = leerDenominadorHasta9999999(denominador);
             D = pluralOSingular(D, numerador, denominador);
             String resultado =NE + ", " + N + " " + D;
             resultado = pasarAMayusculaPrimeraPalabra(resultado);
@@ -285,6 +285,9 @@ public class Fractions {
     }
 
     public static String leerDenominadorHasta19(int denominador) {
+        if (denominador > 20 ) {
+            denominador = denominador % 100;
+        }
         return switch (denominador) {
             case 1 -> "un";
             case 2 -> "dos";
@@ -324,7 +327,7 @@ public class Fractions {
             case 8 -> unidades == 0 ? "vuitant" : "vuitanta-" + leerDenominadorHasta19(unidades);
             case 9 -> unidades == 0 ? "norant" : "noranta-" + leerDenominadorHasta19(unidades);
             case 10 -> unidades == 0 ? "centèsim" : "centesim-" + leerDenominadorHasta19(unidades);
-            default -> "";
+            default -> leerDenominadorHasta19(denominador);
         };
     }
 
@@ -353,7 +356,7 @@ public class Fractions {
             case 7 -> "set-cent" + comprovacionDeCentOCentesim(denominador) + "s " + leerDenominadorHasta100(decimales);
             case 8 -> "vuit-cent" + comprovacionDeCentOCentesim(denominador) + "s " + leerDenominadorHasta100(decimales);
             case 9 -> "nou-cent" + comprovacionDeCentOCentesim(denominador) + "s " + leerDenominadorHasta100(decimales);
-            default -> "";
+            default -> leerDenominadorHasta100(denominador);
         };
     }
 
@@ -376,9 +379,6 @@ public class Fractions {
 
     public static String leerDenominadorHasta20000(int denominador) {
         if (denominador < 1000 && denominador != 1) return leerDenominadorHasta1000(denominador);
-        if (denominador == 1) {
-            return "";
-        }
         int milesimas = denominador / 1000;
         if (milesimas > 20) {
             int separador = denominador % 10000;
@@ -428,9 +428,6 @@ public class Fractions {
 
     public static String leerDenominadorHasta100000(int denominador) {
         if (denominador <= 20000 && denominador != 1 ) return leerDenominadorHasta20000(denominador);
-        if (denominador == 1) {
-            return "";
-        }
         int milesimas = denominador / 10000;
         if (milesimas > 10) {
             milesimas = milesimas % 10;
@@ -445,16 +442,13 @@ public class Fractions {
             case 8 -> "vuitanta" + comprovacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
             case 9 -> "noranta" + comprovacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
             case 10 -> "cent mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta20000(denominador);
-            default -> "";
+            default -> leerDenominadorHasta20000(denominador);
         };
     }
 
 
       public static String leerDenominadorHasta1000000(int denominador) {
-        if (denominador < 100000 && denominador != 1 ) return leerDenominadorHasta100000(denominador);
-        if (denominador == 1) {
-            return "";
-        }
+        if (denominador < 100000) return leerDenominadorHasta100000(denominador);
         int milesimas = denominador / 100000;
         if (milesimas > 10) {
             milesimas = milesimas % 10;
@@ -468,7 +462,7 @@ public class Fractions {
             case 7 -> "set-cents mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
             case 8 -> "vuit-cents mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
             case 9 -> "nou-cents mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
-            default -> leerDenominadorHasta20000(denominador);
+            default -> leerDenominadorHasta100000(denominador);
         };
     }
 
@@ -490,20 +484,18 @@ public class Fractions {
 
     public static String leerDenominadorHasta9999999(int denominador) {
         if (denominador < 1000000 && denominador != 1 ) return leerDenominadorHasta1000000(denominador);
-        if (denominador == 1) {
-            return "";
-        }
         int milesimas = denominador / 1000000;
+        int resto = denominador % 1000000;
         return switch (milesimas) {
-            case 1 -> "mili" + comprovacionDeMilOMilmilesimEspecial1000000(denominador) + leerDenominadorHasta1000000(denominador);
-            case 2 -> "dos mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(denominador);
-            case 3 -> "tres mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(denominador);
-            case 4 -> "quatre mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(denominador);
-            case 5 -> "cinc mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(denominador);
-            case 6 -> "sis mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(denominador);
-            case 7 -> "set mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(denominador);
-            case 8 -> "vuit mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(denominador);
-            case 9 -> "nou mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(denominador);
+            case 1 -> "mili" + comprovacionDeMilOMilmilesimEspecial1000000(denominador) + leerDenominadorHasta1000000(resto);
+            case 2 -> "dos mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(resto);
+            case 3 -> "tres mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(resto);
+            case 4 -> "quatre mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(resto);
+            case 5 -> "cinc mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(resto);
+            case 6 -> "sis mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(resto);
+            case 7 -> "set mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(resto);
+            case 8 -> "vuit mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(resto);
+            case 9 -> "nou mili" + comprovacionDeMilOMilmilesim1000000(denominador) + leerDenominadorHasta1000000(resto);
             default -> "";
         };
     }
