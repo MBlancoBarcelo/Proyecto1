@@ -38,7 +38,7 @@ public class Fractions {
         //Juntar numerador y denominador y pasar a mayuscula
         String resultado = N + " " + D;
         resultado = pasarAMayusculaPrimeraPalabra(resultado);
-        return resultado;
+        return resultado.trim();
     }
     //Este codigo dividira los numeros si el numerador es mas grande que el denominador luego si tiene resto o no
     //si tiene resto le pondra el valor de resto a numerador y le pondra el numero entero a la frase si no
@@ -49,7 +49,7 @@ public class Fractions {
         if (resto == 0) {
             String numeroenteropalabra = leerNumeradorHasta9999999(numeroentero);
             numeroenteropalabra = pasarAMayusculaPrimeraPalabra(numeroenteropalabra);
-            return numeroenteropalabra;
+            return numeroenteropalabra.trim();
         } else {
             numerador = resto;
             String NE = leerNumeradorHasta9999999(numeroentero);
@@ -58,7 +58,7 @@ public class Fractions {
             D = pluralOSingular(D, numerador, denominador);
             String resultado =NE + ", " + N + " " + D;
             resultado = pasarAMayusculaPrimeraPalabra(resultado);
-            return resultado;
+            return resultado.trim();
         }
     }
 
@@ -70,7 +70,7 @@ public class Fractions {
         D = pruralOSingularEspecial(D, numerador);
         String resultado = N + " " + D;
         resultado = pasarAMayusculaPrimeraPalabra(resultado);
-        return resultado;
+        return resultado.trim();
     }
 
     //Coge la primera letra del de una combinacion y la devuelve para que este en mayuscula la primera letra
@@ -378,50 +378,63 @@ public class Fractions {
         }
         int centesimas = denominador % 1000;
         return switch (milesimas) {
-            case 1 -> "mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 2 -> "dos mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 3 -> "tres mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 4 -> "quatre mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 5 -> "cinc mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 6 -> "sis mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 7 -> "set mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 8 -> "vuit mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 9 -> "nou mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 10 -> "deu mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 11 -> "onze mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 12 -> "dotze mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 13 -> "trezte mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 14 -> "catorze mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 15 -> "quinze mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 16 -> "setze mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 17 -> "disset mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 18 -> "divuit mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
-            case 19 -> "dinou mil" + comprovacionDeMilOMilmilesim(denominador) +leerDenominadorHasta1000(centesimas);
-            case 20 -> "vint mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta1000(centesimas);
+            case 1 -> "mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 2 -> "dos mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 3 -> "tres mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 4 -> "quatre mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 5 -> "cinc mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 6 -> "sis mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 7 -> "set mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 8 -> "vuit mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 9 -> "nou mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 10 -> "deu mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 11 -> "onze mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 12 -> "dotze mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 13 -> "trezte mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 14 -> "catorze mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 15 -> "quinze mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 16 -> "setze mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 17 -> "disset mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 18 -> "divuit mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 19 -> "dinou mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
+            case 20 -> "vint mil" + comprovacionDeMilOMilmilesim(denominador) + " " + leerDenominadorHasta1000(centesimas);
             default -> "";
         };
     }
 
+    public static String comprovacionDeMilOMilmilesimEx20 (int denominador) {
+        if ((denominador % 10 == 0) && (denominador % 100 == 0) && (denominador % 1000 == 0) && (denominador / 1000 != 20)){
+            return "-i-";
+        } else {
+            return "";
+        }
+    }
+
     public static String leerDenominadorHasta100000(int denominador, int numerador) {
-        if (denominador < 20000 && denominador != 1 ) return leerDenominadorHasta20000(denominador,numerador);
+        if (denominador <= 20000 && denominador != 1 ) return leerDenominadorHasta20000(denominador);
         if (denominador == 1) {
             return "";
         }
         int milesimas = denominador / 10000;
+        if (denominador / 10000 <= 29 || denominador / 10000 >= 21 ) {
+            int numerodel20 = denominador / 1000;
+            numerodel20 = denominador % 10;
+        }
+        int numerodel20
         if (milesimas > 10) {
             milesimas = milesimas % 10;
         }
         int centesimas = denominador % 10000;
         return switch (milesimas) {
-            case 2 -> (numerador == 1 && centesimas == 0) ? "vint mil·lèsim" : "vint-i-" + leerDenominadorHasta20000(denominador, numerador);
-            case 3 -> (numerador == 1 && centesimas == 0) ? "trenta mil·lèsim" : "trenta-" + leerDenominadorHasta20000(denominador, numerador);
-            case 4 -> (numerador == 1 && centesimas == 0) ? "quaranta mil·lèsim" : "quaranta-" + leerDenominadorHasta20000(denominador, numerador);
-            case 5 -> (numerador == 1 && centesimas == 0) ? "cinquanta mil·lèsim" : "cinquanta-" + leerDenominadorHasta20000(denominador, numerador);
-            case 6 -> (numerador == 1 && centesimas == 0) ? "seixanta mil·lèsim" : "seixanta-" + leerDenominadorHasta20000(denominador, numerador);
-            case 7 -> (numerador == 1 && centesimas == 0) ? "setanta mil·lèsim" : "setanta-" + leerDenominadorHasta20000(denominador, numerador);
-            case 8 -> (numerador == 1 && centesimas == 0) ? "vuitanta mil·lèsim" : "vuitanta-" + leerDenominadorHasta20000(denominador, numerador);
-            case 9 -> (numerador == 1 && centesimas == 0) ? "noranta mil·lèsim" : "noranta-" + leerDenominadorHasta20000(denominador, numerador);
-            case 10 -> (numerador == 1 && centesimas == 0) ? "cent mil·lèsim" : "cent mil " + leerDenominadorHasta20000(denominador, numerador);
+            case 2 -> "vint" + comprovacionDeMilOMilmilesimEx20(denominador) + leerDenominadorHasta19() + leerDenominadorHasta20000(denominador);
+            case 3 -> (numerador == 1 && centesimas == 0) ? "trenta mil·lèsim" : "trenta-" + leerDenominadorHasta20000(denominador);
+            case 4 -> (numerador == 1 && centesimas == 0) ? "quaranta mil·lèsim" : "quaranta-" + leerDenominadorHasta20000(denominador);
+            case 5 -> (numerador == 1 && centesimas == 0) ? "cinquanta mil·lèsim" : "cinquanta-" + leerDenominadorHasta20000(denominador);
+            case 6 -> (numerador == 1 && centesimas == 0) ? "seixanta mil·lèsim" : "seixanta-" + leerDenominadorHasta20000(denominador);
+            case 7 -> (numerador == 1 && centesimas == 0) ? "setanta mil·lèsim" : "setanta-" + leerDenominadorHasta20000(denominador);
+            case 8 -> (numerador == 1 && centesimas == 0) ? "vuitanta mil·lèsim" : "vuitanta-" + leerDenominadorHasta20000(denominador);
+            case 9 -> (numerador == 1 && centesimas == 0) ? "noranta mil·lèsim" : "noranta-" + leerDenominadorHasta20000(denominador);
+            case 10 -> (numerador == 1 && centesimas == 0) ? "cent mil·lèsim" : "cent mil " + leerDenominadorHasta20000(denominador);
             default -> "";
         };
     }
