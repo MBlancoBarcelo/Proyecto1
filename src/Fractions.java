@@ -16,6 +16,10 @@ public class Fractions {
         int numerador = Integer.parseInt(partes[0]);
         int denominador = Integer.parseInt(partes[1]);
 
+        if (denominador == 0 ) {
+            return "Indefinida";
+        }
+
         //Comprueba que los numeros no son iguales
         if (numerador == denominador) {
             return "Un";
@@ -97,7 +101,45 @@ public class Fractions {
     }
 
     public static boolean esPotenciaDeDiez(int denominador) {
-        if (denominador < 10) return false;
+        int contador = 0;
+        if (denominador < 20) {
+            return false;
+        }
+        while ((denominador / 10 != 0))  {
+            denominador /= 10;
+            contador++;
+        }
+        return switch (contador) {
+         case 1 -> comprovacionDe10(denominador);
+         case 2 ->comprovacionDe100(denominador/100);
+         case 3 ->comprovacionDe1000(denominador/1000);
+         case 4 ->comprovacionDe10000(denominador/10000);
+            default -> false;
+        };
+    }
+
+    public static boolean comprovacionDe10(int denominador) {
+        while (denominador % 10 == 0) {
+            denominador /= 10;
+        }
+        return denominador == 1;
+    }
+
+    public static boolean comprovacionDe100(int denominador) {
+        while (denominador % 10 == 0) {
+            denominador /= 10;
+        }
+        return denominador == 1;
+    }
+
+    public static boolean comprovacionDe1000(int denominador) {
+        while (denominador % 10 == 0) {
+            denominador /= 10;
+        }
+        return denominador == 1;
+    }
+
+    public static boolean comprovacionDe10000(int denominador) {
         while (denominador % 10 == 0) {
             denominador /= 10;
         }
@@ -499,6 +541,5 @@ public class Fractions {
             default -> "";
         };
     }
-
 
 }
