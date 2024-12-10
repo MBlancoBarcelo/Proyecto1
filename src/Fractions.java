@@ -31,7 +31,7 @@ public class Fractions {
 
         //Comprueba que los denominador no sea uno especial que en este caso serian del 1 al 4
         if (denominador <= 4) {
-            return comprovacionDeCasosEspeciales(numerador,denominador);
+            return comprobacionDeCasosEspeciales(numerador,denominador);
         }
 
         String N = leerNumeradorHasta9999999(numerador);
@@ -41,7 +41,7 @@ public class Fractions {
 
         //Juntar numerador y denominador y pasar a mayuscula
         String resultado = N + " " + D;
-        resultado = pasarAMayusculaPrimeraPalabra(resultado);
+        resultado = pasarAMayusculaPrimeraLetra(resultado);
         return resultado.trim();
     }
     //Este codigo dividira los numeros si el numerador es mas grande que el denominador luego si tiene resto o no
@@ -52,7 +52,7 @@ public class Fractions {
         int resto = numerador % denominador;
         if (resto == 0) {
             String numeroenteropalabra = leerNumeradorHasta9999999(numeroentero);
-            numeroenteropalabra = pasarAMayusculaPrimeraPalabra(numeroenteropalabra);
+            numeroenteropalabra = pasarAMayusculaPrimeraLetra(numeroenteropalabra);
             return numeroenteropalabra.trim();
         } else {
             numerador = resto;
@@ -61,30 +61,30 @@ public class Fractions {
             String D = leerDenominadorHasta9999999(denominador);
             D = pluralOSingular(D, numerador, denominador);
             String resultado =NE + ", " + N + " " + D;
-            resultado = pasarAMayusculaPrimeraPalabra(resultado);
+            resultado = pasarAMayusculaPrimeraLetra(resultado);
             return resultado.trim();
         }
     }
 
     //Comprueba si el denominador va del 1 al 4 para saber si es nesecario un caso como un mig terç o quart luego le da
     //su prural o singular para montar la frase.
-    public static String comprovacionDeCasosEspeciales (int numerador,int denominador) {
+    public static String comprobacionDeCasosEspeciales (int numerador,int denominador) {
         String N = leerNumeradorHasta9999999(numerador);
         String D = leerDenominadorSiEsEspecial(denominador);
-        D = pruralOSingularEspecial(D, numerador);
+        D = pluralOSingularEspecial(D, numerador);
         String resultado = N + " " + D;
-        resultado = pasarAMayusculaPrimeraPalabra(resultado);
+        resultado = pasarAMayusculaPrimeraLetra(resultado);
         return resultado.trim();
     }
 
     //Coge la primera letra del de una combinacion y la devuelve para que este en mayuscula la primera letra
-    public static String pasarAMayusculaPrimeraPalabra(String resultado) {
+    public static String pasarAMayusculaPrimeraLetra(String resultado) {
         return resultado.substring(0, 1).toUpperCase() + resultado.substring(1);
     }
 
     //Como el pluralOSingular dara problemas a largo plazo con los unidades decimals etc he decidido cortar por lo sano
     //y creado este aparte para los casos especiales y unicos
-    public static String pruralOSingularEspecial(String denominador, int numerador) {
+    public static String pluralOSingularEspecial(String denominador, int numerador) {
         if (denominador.equals("mig") || denominador.equals("quart")) {
             if (numerador == 1) {
                 return denominador;
@@ -121,26 +121,26 @@ public class Fractions {
         int contador = 0;
         int numeroDenominador = denominador;
         if (denominador < 20) {
-            return comprovacionDe10(numeroDenominador);
+            return comprobacionDe10(numeroDenominador);
         }
         while ((denominador / 10 != 0))  {
             denominador /= 10;
             contador++;
         }
         return switch (contador) {
-         case 1 -> comprovacionDe10(numeroDenominador);
-         case 2 -> comprovacionDe100(numeroDenominador%100);
-         case 3 -> comprovacionDe1000(numeroDenominador%1000);
-         case 4 -> comprovacionDe10000(numeroDenominador%10000);
-         case 5 -> comprovacionDe100000(numeroDenominador%100000);
-         case 6 -> comprovacionDe1000000(numeroDenominador%1000000);
+         case 1 -> comprobacionDe10(numeroDenominador);
+         case 2 -> comprobacionDe100(numeroDenominador%100);
+         case 3 -> comprobacionDe1000(numeroDenominador%1000);
+         case 4 -> comprobacionDe10000(numeroDenominador%10000);
+         case 5 -> comprobacionDe100000(numeroDenominador%100000);
+         case 6 -> comprobacionDe1000000(numeroDenominador%1000000);
          default -> false;
         };
     }
 
     //Aqui viene una serie de codigo que cuando es separado dependiendo del numero de vueltas que de
     //sera un numero especifico
-    public static boolean comprovacionDe10(int denominador) {
+    public static boolean comprobacionDe10(int denominador) {
         if (denominador == 0) {
             return true;
         }
@@ -149,7 +149,7 @@ public class Fractions {
         }
         return denominador == 1;
     }
-    public static boolean comprovacionDe100(int denominador) {
+    public static boolean comprobacionDe100(int denominador) {
         if (denominador == 0) {
             return true;
         }
@@ -159,7 +159,7 @@ public class Fractions {
         return denominador == 1;
     }
 
-    public static boolean comprovacionDe1000(int denominador) {
+    public static boolean comprobacionDe1000(int denominador) {
         if (denominador == 1) {
             return false;
         }
@@ -172,7 +172,7 @@ public class Fractions {
         return true;
     }
 
-    public static boolean comprovacionDe10000(int denominador) {
+    public static boolean comprobacionDe10000(int denominador) {
         if (denominador == 0) {
             return true;
         }
@@ -188,7 +188,7 @@ public class Fractions {
         return true;
     }
 
-    public static boolean comprovacionDe100000(int denominador){
+    public static boolean comprobacionDe100000(int denominador){
         if (denominador == 0) {
             return true;
         }
@@ -204,14 +204,14 @@ public class Fractions {
         return true;
     }
 
-    public static boolean comprovacionDe1000000(int denominador){
+    public static boolean comprobacionDe1000000(int denominador){
         if (denominador == 0) {
             return true;
         }
         if ((denominador >= 1) && (denominador <= 9)) {
             return false;
         }
-        if ((denominador >= 10000))  {
+        if ((denominador >= 100000))  {
             return false;
         }
         while (denominador % 10 == 0) {
@@ -533,7 +533,7 @@ public class Fractions {
 
     //Es una comprobacion especial que es unica para el 200000 para saber si añade un -i- o no añade nada ejemplo
     //vint-i-une mil o vint mil
-    public static String comprovacionDeMilOMilmilesimEx20 (int denominador) {
+    public static String comprobacionDeMilOMilmilesimEx20 (int denominador) {
         if ((denominador % 10 == 0) && (denominador % 100 == 0) && (denominador % 1000 == 0) && (denominador / 1000 != 20)){
             return "-i-";
         } else {
@@ -542,7 +542,7 @@ public class Fractions {
     }
 
     //Este es para el resto de casos del 100000 Ejemplo:trenta mil, trenta-cinc mil
-    public static String comprovacionDeMilOMilmilesim100000 (int denominador) {
+    public static String comprobacionDeMilOMilmilesim100000 (int denominador) {
         if ((denominador % 10 == 0) && (denominador % 100 == 0) && (denominador % 1000 == 0) && (denominador % 10000 == 0 )){
             return " ";
         } else {
@@ -558,14 +558,14 @@ public class Fractions {
             milesimas = milesimas % 10;
         }
         return switch (milesimas) {
-            case 2 -> "vint" + comprovacionDeMilOMilmilesimEx20(denominador) + leerDenominadorHasta20000(denominador);
-            case 3 -> "trenta" + comprovacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
-            case 4 -> "quaranta" + comprovacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
-            case 5 -> "cinquanta" + comprovacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
-            case 6 -> "seixanta" + comprovacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
-            case 7 -> "setanta" + comprovacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
-            case 8 -> "vuitanta" + comprovacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
-            case 9 -> "noranta" + comprovacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
+            case 2 -> "vint" + comprobacionDeMilOMilmilesimEx20(denominador) + leerDenominadorHasta20000(denominador);
+            case 3 -> "trenta" + comprobacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
+            case 4 -> "quaranta" + comprobacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
+            case 5 -> "cinquanta" + comprobacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
+            case 6 -> "seixanta" + comprobacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
+            case 7 -> "setanta" + comprobacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
+            case 8 -> "vuitanta" + comprobacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
+            case 9 -> "noranta" + comprobacionDeMilOMilmilesim100000(denominador) + leerDenominadorHasta20000(denominador);
             case 10 -> "cent mil" + comprobacionDeMilOMilmilesim(denominador) + leerDenominadorHasta20000(denominador);
             default -> leerDenominadorHasta20000(denominador);
         };
