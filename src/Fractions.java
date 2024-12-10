@@ -551,14 +551,14 @@ public class Fractions {
             milesimas = milesimas % 10;
         }
         return switch (milesimas) {
-            case 2 -> "dos-cents mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
-            case 3 -> "tres-cents mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
-            case 4 -> "quatre-cents mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
+            case 2 -> "dos-cents" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
+            case 3 -> "tres-cents" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
+            case 4 -> "quatre-cents" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
             case 5 -> "cinc-cents" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
-            case 6 -> "sis-cents mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
-            case 7 -> "set-cents mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
-            case 8 -> "vuit-cents mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
-            case 9 -> "nou-cents mil" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
+            case 6 -> "sis-cents" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
+            case 7 -> "set-cents" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
+            case 8 -> "vuit-cents" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
+            case 9 -> "nou-cents" + comprovacionDeMilOMilmilesim(denominador) + leerDenominadorHasta100000(denominador);
             default -> leerDenominadorHasta100000(denominador);
         };
     }
